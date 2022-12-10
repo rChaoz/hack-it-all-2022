@@ -3,10 +3,12 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 import {Step1, Step1Load} from "./pages/Step1";
 import React from "react";
 import Step from "./pages/Step";
+import {Step2} from "./pages/Step2";
 
 const routes = (<>
     <Route path={"/step"} element={<Step/>}>
         <Route index={true} element={<Step1 unitate={"ceva"}/>} loader={Step1Load}/>
+        <Route path={"locatie"} element={<Step2 />}/>
     </Route>
 </>)
 
