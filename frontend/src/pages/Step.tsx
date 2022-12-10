@@ -1,5 +1,5 @@
 import {Outlet} from "react-router-dom";
-import {AppShell, Button, Center, Container, createStyles, Flex, Header, Paper, Progress, Text, Title, useMantineTheme} from "@mantine/core";
+import {AppShell, Button, Center, Container, createStyles, Flex, Footer, Header, Paper, Progress, Text, Title, useMantineTheme} from "@mantine/core";
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {IconChevronLeft} from "@tabler/icons";
 import {useMediaQuery} from "@mantine/hooks";
@@ -53,9 +53,7 @@ export default function Step({}: StepProps) {
     const theme = useMantineTheme()
     const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
-    return <AppShell padding={0} header={<StepHeader step={step} smallScreen={smallScreen}/>} footer={<Center>
-        <Button>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
-    </Center>}>
+    return <AppShell padding={0} header={<StepHeader step={step} smallScreen={smallScreen}/>} footer={<StepFooter step={step}/>}>
         <StepContext.Provider value={{step, setStep, smallScreen}}>
             <Container size={"sm"}>
                 {smallScreen ? <Outlet/> :
@@ -90,4 +88,18 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
             </Flex>
         </Center>
     </Header>
+}
+
+interface StepFooterProps {
+    step: number
+}
+
+function StepFooter({step}: StepFooterProps) {
+    return (<Footer height={60}>
+        <Container size={300}>
+            <Flex direction={"column"} align={"stretch"}>
+                <Button my={12}>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
+            </Flex>
+        </Container>
+    </Footer>)
 }
