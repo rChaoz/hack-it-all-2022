@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {MantineProvider} from "@mantine/core";
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Routes} from "react-router-dom";
+import {Step1, Step1Load} from "./pages/step1";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const routes = (<>
+    <Route path={"/"} element={<Step1 unitate={"unitate"}/>} loader={Step1Load}/>
+    <Route path={"/step2"}/>
+</>)
+
+const router = createBrowserRouter(createRoutesFromElements(routes))
+
+export default function App() {
+    return (<MantineProvider>
+        <RouterProvider router={router}/>
+    </MantineProvider>)
 }
-
-export default App;
