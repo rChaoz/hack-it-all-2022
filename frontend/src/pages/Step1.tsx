@@ -1,4 +1,3 @@
-import {useLoaderData} from "react-router-dom";
 import {Button, Checkbox, createStyles, Flex, Text, Title} from "@mantine/core";
 import React from "react";
 
@@ -6,19 +5,10 @@ const useStyles = createStyles(theme => ({
 }))
 
 interface Step1Props {
-    unitate: String
-    test?: number
 }
 
-interface Step1Data {
-    zile: number[]
-}
-
-export function Step1({unitate, test}: Step1Props) {
+export function Step1({}: Step1Props) {
     const {classes} = useStyles()
-    const date_unitate = useLoaderData() as Step1Data
-
-    const zile = date_unitate.zile
 
     return (<div>
         <Title font-size={20} order={2} align={"center"}>Despre ce vrei sa vorbim?</Title>
@@ -51,16 +41,4 @@ export function Step1({unitate, test}: Step1Props) {
 
         </Flex>
     </div>)
-}
-
-interface AltaComponentaProps {
-    arg: string
-}
-
-function AltaComponenta({arg}: AltaComponentaProps) {
-    return <div>chestii: {arg}</div>
-}
-
-export function Step1Load(): Step1Data {
-    return {zile: [1, 2, 3]}
 }
