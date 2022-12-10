@@ -1,13 +1,13 @@
 import {MantineProvider} from "@mantine/core";
 import {createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider} from "react-router-dom";
-import {Step1, Step1Load} from "./pages/Step1";
+import {Step1} from "./pages/Step1";
 import React from "react";
 import Step from "./pages/Step";
 
 const routes = (<>
     <Route path={"/"} element={<Navigate to={"/step"}/>}/>
     <Route path={"/step"} element={<Step/>}>
-        <Route index={true} element={<Step1 unitate={"ceva"}/>} loader={Step1Load}/>
+        <Route index={true} element={<Step1/>}/>
     </Route>
 </>)
 
