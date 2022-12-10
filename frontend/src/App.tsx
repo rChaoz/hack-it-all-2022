@@ -1,6 +1,6 @@
-import {MantineProvider} from "@mantine/core";
+import {ColorSchemeProvider, MantineProvider} from "@mantine/core";
 import {createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider} from "react-router-dom";
-import React from "react";
+import React, {useCallback, useState} from "react";
 import Step from "./pages/Step";
 import {Step1} from "./pages/Step1";
 import {Step2} from "./pages/Step2";
@@ -10,6 +10,7 @@ import {Step5} from "./pages/Step5";
 import {Step6} from "./pages/Step6";
 import {Success} from "./pages/Success";
 import {Delete} from "./pages/Delete";
+import {useColorScheme} from "@mantine/hooks";
 
 const routes = (<>
     <Route path={"/"} element={<Navigate to={"/step"}/>}/>
@@ -28,13 +29,16 @@ const routes = (<>
 const router = createBrowserRouter(createRoutesFromElements(routes))
 
 export default function App() {
+    const [colorScheme, setColorScheme] = useState(useColorScheme() ?? "light")
+    const toggleColorScheme = useCallback(() => setColorScheme(colorScheme == "light" ? "dark" : "light"), [colorScheme, setColorScheme])
+
     return (<MantineProvider withNormalizeCSS withGlobalStyles theme={{
-        colorScheme: "light",
+        colorScheme,
         fontFamily: "'Montserrat', sans-serif",
         headings: {
             fontFamily: "'Montserrat', sans-serif",
         },
-        primaryColor: "blue",
+        primaryColor: "bcr",
 
         colors: {
             bcr: [
@@ -58,7 +62,15 @@ export default function App() {
                 }
             }
         },
+
+        globalStyles: theme => ({
+            body: {
+                backgroundColor: theme.colorScheme == 'light' ? theme.colors.bcr[0] : theme.colors.dark[8],
+            },
+        })
     }}>
-        <RouterProvider router={router}/>
+        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+            <RouterProvider router={router}/>
+        </ColorSchemeProvider>
     </MantineProvider>)
 }

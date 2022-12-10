@@ -1,6 +1,7 @@
 import {Text, TextInput, Title} from "@mantine/core";
 import React, {useContext, useEffect} from "react";
 import {StepContext} from "./Step";
+import {IconSearch} from "@tabler/icons";
 
 
 interface Step2Props {
@@ -13,6 +14,6 @@ export function Step2({}: Step2Props) {
     return (<>
         <Title order={2} align={"center"}>În ce locație ne vizitezi?</Title>
         <Text pb={"md"}>Caută unitatea BCR unde programezi vizita:</Text>
-        <TextInput label="Caută unitatea" placeholder="Nume unitate / Adresă / Zonă"/>
+        <TextInput label="Caută unitatea" placeholder="Nume unitate / Adresă / Zonă" icon={<IconSearch size={20}/>}/>
     </>)
 }

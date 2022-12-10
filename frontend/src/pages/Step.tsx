@@ -3,25 +3,29 @@ import {ActionIcon, AppShell, Button, Center, Container, createStyles, Flex, Foo
 import React, {Dispatch, SetStateAction, useRef, useState} from "react";
 import {IconChevronLeft} from "@tabler/icons";
 import {useMediaQuery} from "@mantine/hooks";
+import ColorSchemeToggle from "../components/ColorSchemeToggle";
 
 const useStyles = createStyles(theme => ({
     header: {
-        backgroundColor: theme.colors.bcr[9],
         color: theme.white,
     },
     bar: {
+        backgroundColor: theme.colors.bcr[9],
         position: "relative",
         height: 80,
     },
     step: {
-        backgroundColor: theme.colors.bcr[0],
         height: 70,
     },
     buttonBack: {
         position: "absolute",
-        marginLeft: theme.spacing.md,
-        left: 0,
+        left: theme.spacing.xl,
     },
+    colorSchemeToggle: {
+        position: "absolute",
+        marginRight: theme.spacing.xs,
+        right: 0,
+    }
 }))
 
 export interface StepContextValue {
@@ -86,13 +90,20 @@ interface StepHeaderProps {
 
 function StepHeader({step, smallScreen}: StepHeaderProps) {
     const {classes} = useStyles()
+    const navigate = useNavigate()
 
     return <Header height={150} className={classes.header}>
         <Center className={classes.bar}>
-            <ActionIcon className={classes.buttonBack}>
-                <IconChevronLeft size={32}/>
-            </ActionIcon>
-            <Title mx={50} pb={0} size={smallScreen ? "h2" : "h1"} inline align={"center"}>Programare vizită la BCR</Title>
+            {step > 1 ?
+                <ActionIcon className={classes.buttonBack} onClick={() => {
+                    navigate(steps[step - 2].link)
+                }
+                }>
+                    <IconChevronLeft size={32}/>
+                </ActionIcon>
+                : null}
+            <Title mx={80} pb={0} size={smallScreen ? "h2" : "h1"} inline align={"center"}>Programare vizită la BCR</Title>
+            <ColorSchemeToggle className={classes.colorSchemeToggle}/>
         </Center>
         <Center className={classes.step}>
             <Flex direction={"column"}>
