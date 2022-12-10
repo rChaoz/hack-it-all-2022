@@ -1,5 +1,5 @@
 import {useLoaderData} from "react-router-dom";
-import {Button, Checkbox, createStyles, Flex} from "@mantine/core";
+import {Button, Checkbox, createStyles, Flex, Text, Title} from "@mantine/core";
 import React from "react";
 
 const useStyles = createStyles(theme => ({
@@ -21,6 +21,8 @@ export function Step1({unitate, test}: Step1Props) {
     const zile = date_unitate.zile
 
     return (<div>
+        <Title font-size={20} order={2} align={"center"}>Despre ce vrei sa vorbim?</Title>
+        <Text py={10}>Alege un motiv pentru care programezi vizita in unitate</Text>
         <Flex
             mih={50}
             bg="white"
