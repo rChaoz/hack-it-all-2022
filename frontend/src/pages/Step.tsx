@@ -44,6 +44,18 @@ const steps = [
     {title: "Sumarul programării", link: "summary"},
 ]
 
+export interface FormData {
+    action: string,
+    idSucursala: string,
+    date: string,
+    time: string,
+    name: string,
+    surname: string,
+    cnp: string,
+    email: string,
+    phone: string,
+
+}
 interface StepProps {
 }
 
