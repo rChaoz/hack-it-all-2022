@@ -5,6 +5,7 @@ import React from "react";
 import Step from "./pages/Step";
 import {Step2} from "./pages/Step2";
 import {Step4} from "./pages/Step4";
+import {Step5} from "./pages/Step5";
 
 const routes = (<>
     <Route path={"/"} element={<Navigate to={"/step"}/>}/>
@@ -12,6 +13,7 @@ const routes = (<>
         <Route index={true} element={<Step1/>}/>
         <Route path={"locatie"} element={<Step2/>}/>
         <Route path={"name"} element={<Step4 />}/>
+        <Route path={"contact"} element={<Step5 />}/>
     </Route>
 </>)
 
