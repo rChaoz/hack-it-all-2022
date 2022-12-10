@@ -1,4 +1,4 @@
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {AppShell, Button, Center, Container, createStyles, Flex, Footer, Header, Paper, Progress, Text, Title, useMantineTheme} from "@mantine/core";
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {IconChevronLeft} from "@tabler/icons";
@@ -36,12 +36,12 @@ export interface StepContextValue {
 export const StepContext = React.createContext<StepContextValue | null>(null)
 
 const steps = [
-    {title: "Alege scopul vizitei"},
-    {title: "Alege unitatea BCR"},
-    {title: "Alege data și intervalul orar"},
-    {title: "Să ne cunoaștem!"},
-    {title: "Lasă-ne datele de contact"},
-    {title: "Sumarul programării"},
+    {title: "Alege scopul vizitei", link: ""},
+    {title: "Alege unitatea BCR", link: "location"},
+    {title: "Alege data și intervalul orar", link: "date"},
+    {title: "Să ne cunoaștem!", link: "name"},
+    {title: "Lasă-ne datele de contact", link: "contact"},
+    {title: "Sumarul programării", link: "summary"},
 ]
 
 interface StepProps {
@@ -95,10 +95,12 @@ interface StepFooterProps {
 }
 
 function StepFooter({step}: StepFooterProps) {
+    const navigate = useNavigate()
+
     return (<Footer height={60}>
         <Container size={300}>
             <Flex direction={"column"} align={"stretch"}>
-                <Button my={12}>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
+                <Button my={12} onClick={() => navigate(steps[step].link)}>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
             </Flex>
         </Container>
     </Footer>)

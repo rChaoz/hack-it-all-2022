@@ -1,39 +1,34 @@
-import {useLoaderData} from "react-router-dom";
-import {Text, Checkbox, createStyles, Flex, Loader, TextInput, Title, Box, Group, Button} from "@mantine/core";
-import React from "react";
+import {Box, Checkbox, Text, TextInput, Title} from "@mantine/core";
+import React, {useContext, useEffect} from "react";
 import {useForm} from "@mantine/form";
-
-const useStyles = createStyles(theme => ({
-}))
+import {StepContext} from "./Step";
 
 interface Step4Props {
-
 }
 
-
-
 export function Step4({}: Step4Props) {
-    const {classes} = useStyles()
+    const context = useContext(StepContext)!;
+    useEffect(() => context.setStep(4), [])
 
     const form = useForm({
         initialValues: {
-            nume: '',
-            familie:'',
-            cnp:'',
+            name: '',
+            surname: '',
+            cnp: '',
             termsOfService: false,
         },
 
         validate: {
-            nume: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'), //aici pui tu regexu cum trebuie
-            familie: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            name: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'), //aici pui tu regexu cum trebuie
+            surname: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
             cnp: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
         },
     });
 
-    return (<div>
+    return (<>
         <Title order={2} align={"center"} py={"sm"}>Salut, cum te numesti?</Title>
         <Text pt={"xs"} pb={"md"}>Haide sa ne cunoastem. Introdu numele de familie si prenumele.</Text>
-        <Box sx={{ maxWidth: 300 }} mx="auto">
+        <Box sx={{maxWidth: 300}} mx="auto">
             <form onSubmit={form.onSubmit((values) => console.log(values))}>
                 <TextInput
                     withAsterisk
@@ -59,11 +54,11 @@ export function Step4({}: Step4Props) {
                 <Checkbox
                     mt="md"
                     label="Sunt de acord cu politica de prelucrare a datelor cu caracter personal"
-                    {...form.getInputProps('termsOfService', { type: 'checkbox' })}
+                    {...form.getInputProps('termsOfService', {type: 'checkbox'})}
                 />
 
             </form>
         </Box>
 
-    </div>)
+    </>)
 }

@@ -1,9 +1,10 @@
 import {MantineProvider} from "@mantine/core";
 import {createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider} from "react-router-dom";
-import {Step1} from "./pages/Step1";
 import React from "react";
 import Step from "./pages/Step";
+import {Step1} from "./pages/Step1";
 import {Step2} from "./pages/Step2";
+import {Step3} from "./pages/Step3";
 import {Step4} from "./pages/Step4";
 import {Step5} from "./pages/Step5";
 
@@ -11,7 +12,8 @@ const routes = (<>
     <Route path={"/"} element={<Navigate to={"/step"}/>}/>
     <Route path={"/step"} element={<Step/>}>
         <Route index={true} element={<Step1/>}/>
-        <Route path={"locatie"} element={<Step2/>}/>
+        <Route path={"location"} element={<Step2/>}/>
+        <Route path={"date"} element={<Step3/>}/>
         <Route path={"name"} element={<Step4 />}/>
         <Route path={"contact"} element={<Step5 />}/>
     </Route>
