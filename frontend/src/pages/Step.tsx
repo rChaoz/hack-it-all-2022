@@ -33,7 +33,7 @@ interface StepHeaderProps {
 
 function StepHeader({step}: StepHeaderProps) {
     const {classes} = useStyles()
-    return <Header height={80} className={classes.header}>
+    return <header className={classes.header}>
         <Center className={classes.bar}>
             <Title>Programare vizita la BCR</Title>
         </Center>
@@ -43,5 +43,5 @@ function StepHeader({step}: StepHeaderProps) {
                 <Progress value={step / 7 * 100} color={"#21416c"}/>
             </Flex>
         </Center>
-    </Header>
+    </header>
 }
