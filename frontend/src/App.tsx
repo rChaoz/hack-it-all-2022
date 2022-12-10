@@ -7,6 +7,7 @@ import {Step2} from "./pages/Step2";
 import {Step3} from "./pages/Step3";
 import {Step4} from "./pages/Step4";
 import {Step5} from "./pages/Step5";
+import {Step6} from "./pages/Step6";
 
 const routes = (<>
     <Route path={"/"} element={<Navigate to={"/step"}/>}/>
@@ -16,6 +17,7 @@ const routes = (<>
         <Route path={"date"} element={<Step3/>}/>
         <Route path={"name"} element={<Step4 />}/>
         <Route path={"contact"} element={<Step5 />}/>
+        <Route path={"summary"} element={<Step6 />}/>
     </Route>
 </>)
 
@@ -51,7 +53,7 @@ export default function App() {
                     pb: "md",
                 }
             }
-        }
+        },
     }}>
         <RouterProvider router={router}/>
     </MantineProvider>)
