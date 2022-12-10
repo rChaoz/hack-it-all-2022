@@ -26,8 +26,8 @@ export function Step5({}: Step5Props) {
 
     return (<div>
         {/*nume va fi primit de la step4*/}
-        <Title order={2} align={"center"} py={"sm"}>NUME, lasa-ne datele de contact</Title>
-        <Text pt={"xs"} pb={"md"}>Pe datele furnizate iti vom transmite informatiile pentru aceasta programare.</Text>
+        <Title order={2} align={"center"}>NUME, lasa-ne datele de contact</Title>
+        <Text pb={"md"}>Pe datele furnizate iti vom transmite informatiile pentru aceasta programare.</Text>
         <Box sx={{maxWidth: 300}} mx="auto">
             <form onSubmit={form.onSubmit((values) => console.log(values))}>
                 <TextInput

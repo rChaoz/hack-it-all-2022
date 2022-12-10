@@ -26,8 +26,8 @@ export function Step4({}: Step4Props) {
     });
 
     return (<>
-        <Title order={2} align={"center"} py={"sm"}>Salut, cum te numesti?</Title>
-        <Text pt={"xs"} pb={"md"}>Haide sa ne cunoastem. Introdu numele de familie si prenumele.</Text>
+        <Title order={2} align={"center"}>Salut, cum te numesti?</Title>
+        <Text pb={"md"}>Haide sa ne cunoastem. Introdu numele de familie si prenumele.</Text>
         <Box sx={{maxWidth: 300}} mx="auto">
             <form onSubmit={form.onSubmit((values) => console.log(values))}>
                 <TextInput

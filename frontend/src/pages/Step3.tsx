@@ -12,8 +12,8 @@ export function Step3({}: Step3Props) {
     useEffect(() => context.setStep(3), [])
 
     return (<>
-        <Title font-size={20} order={2} align={"center"}>În ce zi ne vizitezi?</Title>
-        <Text py={10}>Alege data și intervalul orar pentru vizita la BCR-NumeUnitate</Text>
+        <Title order={2} align={"center"}>În ce zi ne vizitezi?</Title>
+        <Text pb={"md"}>Alege data și intervalul orar pentru vizita la BCR-NumeUnitate</Text>
         <DatePicker placeholder="Pick date" label="Alege data" withAsterisk/>
     </>)
 }

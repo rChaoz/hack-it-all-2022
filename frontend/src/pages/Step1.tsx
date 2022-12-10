@@ -7,7 +7,7 @@ interface Step1Props {
 
 export function Step1({}: Step1Props) {
     const context = useContext(StepContext)!;
-    useEffect(() => context.setStep(1), [])
+    useEffect(() => context.setStep(1), [context])
 
     return (<>
         <Title order={2} align={"center"}>Despre ce vrei sa vorbim?</Title>
