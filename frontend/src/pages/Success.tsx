@@ -1,4 +1,11 @@
-import {Text, Checkbox, createStyles, TextInput, Title, MantineProvider, ThemeIcon} from "@mantine/core";
+import {
+    Text,
+    createStyles,
+    Title,
+    MantineProvider,
+    Center,
+    Button
+} from "@mantine/core";
 import React from "react";
 import {IconCircleCheck} from "@tabler/icons";
 
@@ -20,11 +27,11 @@ export function Success({}: SuccessProps) {
             }
         })
     }}>
-        <Title order={4} align={"center"} py={"sm"}>Programare vizita la BCR</Title>
-        <IconCircleCheck />
+        <Title order={4} align={"center"} py={"md"}>Programare vizita la BCR</Title>
+        <Center py={"xl"}><IconCircleCheck size={100}/></Center>
         <Title order={3} align={"center"} py={"sm"}>Vizita in unitatea BCR a fost programata cu succes!</Title>
-        <Text pt={"xs"} pb={"md"}>Urmeaza sa primesti pe adresa de mail toate informatiile despre programarea ta.</Text>
-
+        <Text align={"center"} pt={"xl"} pb={"md"}>Urmeaza sa primesti pe adresa de mail toate informatiile despre programarea ta.</Text>
+        <Center><Button variant={"white"}>Înapoi la bcr.ro</Button></Center>
 
     </MantineProvider>)
 }
