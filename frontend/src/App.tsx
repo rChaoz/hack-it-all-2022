@@ -3,11 +3,13 @@ import {createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterPr
 import {Step1} from "./pages/Step1";
 import React from "react";
 import Step from "./pages/Step";
+import {Step2} from "./pages/Step2";
 
 const routes = (<>
     <Route path={"/"} element={<Navigate to={"/step"}/>}/>
     <Route path={"/step"} element={<Step/>}>
         <Route index={true} element={<Step1/>}/>
+        <Route path={"locatie"} element={<Step2/>}/>
     </Route>
 </>)
 
