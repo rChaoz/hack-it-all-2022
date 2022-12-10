@@ -1,27 +1,18 @@
-import {Button, Checkbox, createStyles, Flex, Text, Title} from "@mantine/core";
-import React from "react";
-
-const useStyles = createStyles(theme => ({
-}))
+import {Button, Flex, Text, Title} from "@mantine/core";
+import React, {useContext, useEffect} from "react";
+import {StepContext} from "./Step";
 
 interface Step1Props {
 }
 
 export function Step1({}: Step1Props) {
-    const {classes} = useStyles()
+    const context = useContext(StepContext)!;
+    useEffect(() => context.setStep(1), [])
 
-    return (<div>
-        <Title font-size={20} order={2} align={"center"}>Despre ce vrei sa vorbim?</Title>
-        <Text py={10}>Alege un motiv pentru care programezi vizita in unitate</Text>
-        <Flex
-            mih={50}
-            bg="white"
-            gap="xs"
-            justify="flex-start"
-            align="stretch"
-            direction="column"
-            wrap="wrap"
-        >
+    return (<>
+        <Title order={2} align={"center"}>Despre ce vrei sa vorbim?</Title>
+        <Text align={"center"} pb={"md"}>Alege un motiv pentru care programezi vizita in unitate:</Text>
+        <Flex gap="xs" align="stretch" direction="column" mx={context.smallScreen ? 0 : 100}>
             <Button variant={"outline"}>Depunere sau retragere de bani</Button>
             <Button variant={"outline"}>Plata rata credit</Button>
             <Button variant={"outline"}>Operatiune fara numerar</Button>
@@ -38,7 +29,6 @@ export function Step1({}: Step1Props) {
             <Button variant={"outline"}>Investitii - rascumparare</Button>
             <Button variant={"outline"}>Asigurare</Button>
             <Button variant={"outline"}>Pensie privata</Button>
-
         </Flex>
-    </div>)
+    </>)
 }

@@ -36,6 +36,14 @@ export default function App() {
                 '#21416c',
             ],
         },
+
+        components: {
+            Title: {
+                defaultProps: {
+                    pb: "md",
+                }
+            }
+        }
     }}>
         <RouterProvider router={router}/>
     </MantineProvider>)

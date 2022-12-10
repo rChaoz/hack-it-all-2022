@@ -1,7 +1,8 @@
 import {Outlet} from "react-router-dom";
-import {AppShell, Button, Center, createStyles, Flex, Header, Progress, Text, Title} from "@mantine/core";
+import {AppShell, Button, Center, Container, createStyles, Flex, Header, Paper, Progress, Text, Title, useMantineTheme} from "@mantine/core";
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {IconChevronLeft} from "@tabler/icons";
+import {useMediaQuery} from "@mantine/hooks";
 
 const useStyles = createStyles(theme => ({
     header: {
@@ -29,6 +30,7 @@ const useStyles = createStyles(theme => ({
 export interface StepContextValue {
     step: number
     setStep: Dispatch<SetStateAction<number>>
+    smallScreen: boolean
 }
 
 export const StepContext = React.createContext<StepContextValue | null>(null)
@@ -47,20 +49,31 @@ interface StepProps {
 
 export default function Step({}: StepProps) {
     const [step, setStep] = useState(1)
-    return <AppShell header={<StepHeader step={step}/>} footer={<Center>
+
+    const theme = useMantineTheme()
+    const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+
+    return <AppShell padding={0} header={<StepHeader step={step} smallScreen={smallScreen}/>} footer={<Center>
         <Button>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
     </Center>}>
-        <StepContext.Provider value={{step, setStep}}>
-            <Outlet/>
+        <StepContext.Provider value={{step, setStep, smallScreen}}>
+            <Container size={"sm"}>
+                {smallScreen ? <Outlet/> :
+                    <Paper shadow={"md"} p={"sm"} m={"xs"} withBorder>
+                        <Outlet/>
+                    </Paper>
+                }
+            </Container>
         </StepContext.Provider>
     </AppShell>
 }
 
 interface StepHeaderProps {
     step: number
+    smallScreen: boolean
 }
 
-function StepHeader({step}: StepHeaderProps) {
+function StepHeader({step, smallScreen}: StepHeaderProps) {
     const {classes} = useStyles()
 
     return <Header height={150} className={classes.header}>
@@ -68,7 +81,7 @@ function StepHeader({step}: StepHeaderProps) {
             <Button className={classes.buttonBack}>
                 <IconChevronLeft size={32}/>
             </Button>
-            <Title align={"center"}>Programare vizită la BCR</Title>
+            <Title mx={50} pb={0} size={smallScreen ? "h2" : "h1"} inline align={"center"}>Programare vizită la BCR</Title>
         </Center>
         <Center className={classes.step}>
             <Flex direction={"column"}>
