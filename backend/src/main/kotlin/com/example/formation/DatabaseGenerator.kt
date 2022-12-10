@@ -44,6 +44,7 @@ suspend fun main(args: Array<String>) {
                 it[longitude] = branch.longitude
                 it[phoneNumber] = branch.phoneNumber
                 it[phoneHours] = branch.phoneHours
+                it[available] = branch.available
             }.value
 
             fun insertTimeslots(day: LocalDate, times: List<LocalTime>) {

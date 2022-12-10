@@ -22,6 +22,7 @@ class InputBranch private constructor(private val br: Branch) {
         br.telefon1, br.telefon2, br.telefon3, br.telefon4, br.telefon5
     ).filter { !it.isNullOrBlank() }.joinToString()
     @Transient val phoneHours = "9:00 - 16:30"
+    @Transient var available = true
 
     init {
         val timeRangeRegex = Regex("""(\d\d:\d\d) ?- ?(\d\d:\d\d)""")
@@ -41,6 +42,8 @@ class InputBranch private constructor(private val br: Branch) {
         hoursWeekday = processTimeRange(br.av.mf)
         hoursSaturday = processTimeRange(br.av.sat)
         hoursSunday = processTimeRange(br.av.sun)
+
+        if (hoursWeekday.isEmpty() && hoursSaturday.isEmpty() && hoursSunday.isEmpty()) available = false
     }
 
     @Serializable

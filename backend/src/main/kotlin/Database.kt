@@ -37,6 +37,7 @@ object Branches : IntIdTable() {
     val longitude = double("longitude")
     val phoneNumber = varchar("phoneNumber", 50)
     val phoneHours = varchar("phoneHours", 50)
+    val available = bool("available")
 }
 
 object BranchesTimeslots : IntIdTable() {
