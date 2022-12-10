@@ -1,5 +1,5 @@
 import {MantineProvider} from "@mantine/core";
-import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Routes} from "react-router-dom";
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
 import {Step1, Step1Load} from "./pages/Step1";
 import React from "react";
 import Step from "./pages/Step";
@@ -20,6 +20,21 @@ export default function App() {
             fontFamily: "'Montserrat', sans-serif",
         },
         primaryColor: "blue",
+
+        colors: {
+            bcr: [
+                '#f4f6fa',
+                '#8FA3CC',
+                '#6684A3',
+                '#5c7999',
+                '#5C97EB',
+                '#2575E4',
+                '#1a67d2',
+                '#3568AC',
+                '#264C7D',
+                '#21416c',
+            ],
+        },
     }}>
         <RouterProvider router={router}/>
     </MantineProvider>)
