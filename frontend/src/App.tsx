@@ -1,10 +1,11 @@
 import {MantineProvider} from "@mantine/core";
-import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider} from "react-router-dom";
 import {Step1, Step1Load} from "./pages/Step1";
 import React from "react";
 import Step from "./pages/Step";
 
 const routes = (<>
+    <Route path={"/"} element={<Navigate to={"/step"}/>}/>
     <Route path={"/step"} element={<Step/>}>
         <Route index={true} element={<Step1 unitate={"ceva"}/>} loader={Step1Load}/>
     </Route>
@@ -24,7 +25,7 @@ export default function App() {
         colors: {
             bcr: [
                 '#f4f6fa',
-                '#8FA3CC',
+                '#a3b5c9',
                 '#6684A3',
                 '#5c7999',
                 '#5C97EB',
