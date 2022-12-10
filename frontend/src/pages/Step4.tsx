@@ -19,9 +19,9 @@ export function Step4({}: Step4Props) {
         },
 
         validate: {
-            name: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'), //aici pui tu regexu cum trebuie
-            surname: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            cnp: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            name: (value) => value.length == 0 ? "Te rog sa iți introduci prenumele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Prenume invalid",
+            surname: (value) => value.length == 0 ? "Te rog sa iți introduci numele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Nume invalid",
+            cnp: (value) => (/\d{13}/.test(value) ? null : 'CNP invalid'),
         },
     });
 

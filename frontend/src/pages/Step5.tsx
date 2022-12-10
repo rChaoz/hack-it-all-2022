@@ -19,8 +19,8 @@ export function Step5({}: Step5Props) {
         },
 
         validate: {
-            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            telefon: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'), //la fel ca la CNP
+            email: (value) => /^\S+@\S+$/.test(value) ? null : 'E-mail invalid',
+            telefon: (value) => /\+?\d{10,14}/.test(value) ? null : 'Telefon invalid',
         },
     });
 

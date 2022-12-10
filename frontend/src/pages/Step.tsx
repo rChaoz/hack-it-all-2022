@@ -1,6 +1,6 @@
 import {Outlet, useNavigate} from "react-router-dom";
-import {AppShell, Button, Center, Container, createStyles, Flex, Footer, Header, Paper, Progress, Text, Title, useMantineTheme} from "@mantine/core";
-import React, {Dispatch, SetStateAction, useState} from "react";
+import {ActionIcon, AppShell, Button, Center, Container, createStyles, Flex, Footer, Header, Paper, Popover, Progress, Text, Title, useMantineTheme} from "@mantine/core";
+import React, {Dispatch, SetStateAction, useRef, useState} from "react";
 import {IconChevronLeft} from "@tabler/icons";
 import {useMediaQuery} from "@mantine/hooks";
 
@@ -19,11 +19,8 @@ const useStyles = createStyles(theme => ({
     },
     buttonBack: {
         position: "absolute",
-        paddingInline: 0,
         marginLeft: theme.spacing.md,
         left: 0,
-        border: "none",
-        background: "none",
     },
 }))
 
@@ -31,6 +28,7 @@ export interface StepContextValue {
     step: number
     setStep: Dispatch<SetStateAction<number>>
     smallScreen: boolean
+    stepsData: StepsData
 }
 
 export const StepContext = React.createContext<StepContextValue | null>(null)
@@ -44,29 +42,32 @@ const steps = [
     {title: "Sumarul programării", link: "summary"},
 ]
 
-export interface FormData {
-    action: string,
-    idSucursala: string,
-    date: string,
-    time: string,
-    name: string,
-    surname: string,
-    cnp: string,
-    email: string,
-    phone: string,
+export interface StepsData {
+    action?: string,
+    idBranch?: string,
+    date?: string,
+    time?: string,
+    name?: string,
+    surname?: string,
+    cnp?: string,
+    email?: string,
+    phone?: string,
 
-}
-interface StepProps {
+    isValid: boolean
+    validate?: () => boolean
 }
 
-export default function Step({}: StepProps) {
+export default function Step() {
     const [step, setStep] = useState(1)
+
+    const stepsData = useRef<StepsData>({isValid: false})
 
     const theme = useMantineTheme()
     const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
-    return <AppShell padding={0} header={<StepHeader step={step} smallScreen={smallScreen}/>} footer={<StepFooter step={step}/>}>
-        <StepContext.Provider value={{step, setStep, smallScreen}}>
+    return <AppShell padding={smallScreen ? "xs" : 0} header={<StepHeader step={step} smallScreen={smallScreen}/>}
+                     footer={<StepFooter step={step} stepsData={stepsData.current}/>}>
+        <StepContext.Provider value={{step, setStep, smallScreen, stepsData: stepsData.current}}>
             <Container size={"sm"}>
                 {smallScreen ? <Outlet/> :
                     <Paper shadow={"md"} p={"sm"} m={"xs"} withBorder>
@@ -88,9 +89,9 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
 
     return <Header height={150} className={classes.header}>
         <Center className={classes.bar}>
-            <Button className={classes.buttonBack}>
+            <ActionIcon className={classes.buttonBack}>
                 <IconChevronLeft size={32}/>
-            </Button>
+            </ActionIcon>
             <Title mx={50} pb={0} size={smallScreen ? "h2" : "h1"} inline align={"center"}>Programare vizită la BCR</Title>
         </Center>
         <Center className={classes.step}>
@@ -104,15 +105,35 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
 
 interface StepFooterProps {
     step: number
+    stepsData: StepsData
 }
 
-function StepFooter({step}: StepFooterProps) {
+function StepFooter({step, stepsData}: StepFooterProps) {
     const navigate = useNavigate()
+
+    const [popover, setPopover] = useState(false)
 
     return (<Footer height={60}>
         <Container size={300}>
             <Flex direction={"column"} align={"stretch"}>
-                <Button my={12} onClick={() => navigate(steps[step].link)}>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
+                <Popover width={200} position="top" withArrow shadow="md" opened={popover} onChange={setPopover}>
+                    <Popover.Target>
+                        <Button my={12} onClick={() => {
+                            if (stepsData.validate == null || !stepsData.validate()) {
+                                //setPopover(true)
+                                //return
+                            }
+                            stepsData.validate = undefined
+                            if (step < 6) navigate(steps[step].link)
+                            else {
+                                // TODO efectuare comanda
+                            }
+                        }}>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
+                    </Popover.Target>
+                    <Popover.Dropdown>
+                        <Text size="sm">Te rog să completezi toate câmpurile</Text>
+                    </Popover.Dropdown>
+                </Popover>
             </Flex>
         </Container>
     </Footer>)
