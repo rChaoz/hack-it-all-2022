@@ -8,6 +8,8 @@ import {Step3} from "./pages/Step3";
 import {Step4} from "./pages/Step4";
 import {Step5} from "./pages/Step5";
 import {Step6} from "./pages/Step6";
+import {Success} from "./pages/Success";
+import {Delete} from "./pages/Delete";
 
 const routes = (<>
     <Route path={"/"} element={<Navigate to={"/step"}/>}/>
@@ -19,6 +21,8 @@ const routes = (<>
         <Route path={"contact"} element={<Step5 />}/>
         <Route path={"summary"} element={<Step6 />}/>
     </Route>
+    <Route path={"/success"} element={<Success/>}/>
+    <Route path={"/delete"} element={<Delete/>}/>
 </>)
 
 const router = createBrowserRouter(createRoutesFromElements(routes))
