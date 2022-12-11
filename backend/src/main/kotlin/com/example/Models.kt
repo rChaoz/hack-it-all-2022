@@ -3,6 +3,8 @@ package com.example
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.select
+import java.time.DayOfWeek
+import java.time.LocalDate
 
 @Serializable
 data class Branch(
@@ -13,11 +15,14 @@ data class Branch(
     val operations: String,
     val latitude: Double,
     val longitude: Double,
+    val hours: String,
     val phoneNumber: String,
     val phoneHours: String,
+    var distance: Double = 0.0,
 ) {
     companion object {
         private fun rowToBranch(row: ResultRow) = with(Branches) {
+            val dayOfWeek = LocalDate.now().dayOfWeek
             Branch(
                 row[county],
                 row[city],
@@ -26,6 +31,11 @@ data class Branch(
                 row[operations],
                 row[latitude],
                 row[longitude],
+                when (dayOfWeek) {
+                    DayOfWeek.SATURDAY -> row[hoursSaturday]
+                    DayOfWeek.SUNDAY -> row[hoursSunday]
+                    else -> row[hoursWeekday]
+                },
                 row[phoneNumber],
                 row[phoneHours],
             )
@@ -45,3 +55,9 @@ data class Appointment(
     val calendarLink: String,
     val cancelAppointment: String,
 )
+
+@Serializable
+data class GeolocationResponse(val location: Location, val accuracy: Double) {
+    @Serializable
+    data class Location(val lat: Double, val lng: Double)
+}

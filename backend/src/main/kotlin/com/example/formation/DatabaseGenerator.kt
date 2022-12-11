@@ -42,6 +42,9 @@ suspend fun main(args: Array<String>) {
                 it[operations] = branch.operations
                 it[latitude] = branch.latitude
                 it[longitude] = branch.longitude
+                it[hoursWeekday] = branch.hoursWeekdayString
+                it[hoursSaturday] = branch.hoursSaturdayString
+                it[hoursSunday] = branch.hoursSundayString
                 it[phoneNumber] = branch.phoneNumber
                 it[phoneHours] = branch.phoneHours
                 it[available] = branch.available

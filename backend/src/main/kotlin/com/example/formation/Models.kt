@@ -15,6 +15,9 @@ class InputBranch private constructor(private val br: Branch) {
     @Transient val operations = br.op
     @Transient val latitude = br.brl.lat
     @Transient val longitude = br.brl.long
+    @Transient val hoursWeekdayString = br.av.mf
+    @Transient val hoursSaturdayString = br.av.sat
+    @Transient val hoursSundayString = br.av.sun
     @Transient lateinit var hoursWeekday: List<LocalTime>
     @Transient lateinit var hoursSaturday: List<LocalTime>
     @Transient lateinit var hoursSunday: List<LocalTime>

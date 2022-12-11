@@ -35,3 +35,4 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/*.private.env.*
+/src/main/kotlin/com/example/ApiKey.kt
