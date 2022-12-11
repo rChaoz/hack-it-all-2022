@@ -18,9 +18,9 @@ export function Step4({}: Step4Props) {
         },
 
         validate: {
-            name: (value) => value.length == 0 ? "Te rog sa îți introduci prenumele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Prenume invalid",
-            surname: (value) => value.length == 0 ? "Te rog sa îți introduci numele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Nume invalid",
-            cnp: (value) => (/\d{13}/.test(value) ? null : 'CNP invalid'),
+            name: (value) => value.length == 0 ? "Te rog sa îți introduci prenumele" : /^[a-zA-ZÀ-ž- ]+$/.test(value) ? null : "Prenume invalid",
+            surname: (value) => value.length == 0 ? "Te rog sa îți introduci numele" : /^[a-zA-ZÀ-ž- ]+$/.test(value) ? null : "Nume invalid",
+            cnp: (value) => /^\d{13}$/.test(value) ? null : 'CNP invalid',
         },
     });
 

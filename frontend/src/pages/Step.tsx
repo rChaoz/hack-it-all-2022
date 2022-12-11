@@ -4,6 +4,7 @@ import React, {Dispatch, SetStateAction, useRef, useState} from "react";
 import {IconChevronLeft} from "@tabler/icons";
 import {useMediaQuery} from "@mantine/hooks";
 import ColorSchemeToggle from "../components/ColorSchemeToggle";
+import {StepModel} from "../model/StepModel";
 
 const useStyles = createStyles(theme => ({
     header: {
@@ -73,6 +74,34 @@ export default function Step() {
     const stepsData = stepsDataRef.current
     const [popover, setPopover] = useState(false)
     stepsData.nextStep = (force = false) => {
+        if (step == 6) {
+            const data = stepsData as Required<StepsData>
+
+            const model: StepModel = {
+                actions: [...data.actions.values()].join('|'),
+                branchID: data.branchID,
+                date: `${data.date.getFullYear()}-${data.date.getMonth() + 1}-${data.date.getDate()}`,
+                time: data.time,
+                name: data.name,
+                surname: data.surname,
+                cnp: data.cnp,
+                email: data.email,
+                phone: data.phone,
+            }
+
+            fetch("http://localhost:8080/api/submit", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(model),
+            }).then(response => {
+                if (response.ok) navigate("/success")
+                else console.log("n-am mers :/")
+            })
+            return
+        }
         // noinspection PointlessBooleanExpressionJS
         if (force !== true) {
             if (stepsData.validate == null || !stepsData.validate()) {
@@ -81,10 +110,7 @@ export default function Step() {
             }
         }
         stepsData.validate = undefined
-        if (step < 6) navigate(steps[step].link)
-        else {
-            // TODO efectuare comanda
-        }
+        navigate(steps[step].link)
     }
 
     const theme = useMantineTheme()
@@ -119,8 +145,7 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
             {step > 1 ?
                 <ActionIcon className={classes.buttonBack} onClick={() => {
                     navigate(steps[step - 2].link)
-                }
-                }>
+                }}>
                     <IconChevronLeft size={32}/>
                 </ActionIcon>
                 : null}

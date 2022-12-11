@@ -65,6 +65,7 @@ fun Route.configureBranchesRoutes() {
     }
 
     post("submit") {
+        println("e rau de tot")
         val body = try {
             call.receive<Appointment>()
         } catch (e: Exception) {
@@ -72,7 +73,7 @@ fun Route.configureBranchesRoutes() {
             call.respondText("Invalid data format", status = HttpStatusCode.BadRequest)
             return@post
         }
-
+        println("s-a facut obiect")
         val emailRegex = Regex("""\S+@\S+""")
         val phoneRegex = Regex("""\+?\d{10,14}""")
         val cnpRegex = Regex("""\d{13}""")
@@ -89,6 +90,7 @@ fun Route.configureBranchesRoutes() {
             call.respondText("Invalid data lengths", status = HttpStatusCode.BadRequest)
             return@post
         }
+        println("e aproape bun")
 
         val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
         val randomKey = buildString {
@@ -126,6 +128,7 @@ fun Route.configureBranchesRoutes() {
             call.respondText("Invalid data", status = HttpStatusCode.BadRequest)
             return@post
         }
+        println("e chiar fresh")
         call.respondText("Success", status = HttpStatusCode.OK)
     }
 }

@@ -19,7 +19,7 @@ export function Step5({}: Step5Props) {
 
         validate: {
             email: (value) => /^\S+@\S+$/.test(value) ? null : 'E-mail invalid',
-            phone: (value) => /\+?\d{10,14}/.test(value) ? null : 'Telefon invalid',
+            phone: (value) => /^\+?\d{10,14}$/.test(value) ? null : 'Telefon invalid',
         },
     });
 

@@ -32,7 +32,7 @@ fun Application.module() {
     @Suppress("DEPRECATION")
     install(CORS) {
         anyHost()
-        allowHeaders { true }
+        allowHeader("Content-Type")
     }
     configureSerialization()
     configureRouting()
