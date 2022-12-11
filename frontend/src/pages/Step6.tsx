@@ -11,7 +11,7 @@ export function Step6({}: Step6Props) {
 
     return (<>
         <Title order={2} align={"center"}>Sumarul programării:</Title>
-        <Text>NUME, confirmă dacă datele de mai jos sunt corecte.</Text>
+        <Text>{context.stepsData.name}, confirmă dacă datele de mai jos sunt corecte.</Text>
     </>)
 }
 

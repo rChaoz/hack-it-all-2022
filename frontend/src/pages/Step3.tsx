@@ -45,7 +45,11 @@ export function Step3({}: Step3Props) {
             <LoadingData resolve={resolveTime}>
                 {(timeslots: string[]) => (
                     <Flex gap="xs" align="stretch" direction="column" mx={context.smallScreen ? 0 : 100}>
-                        {timeslots.map(timeslot => <RadioButton name={timeslot} checked={time} onChange={setTime}>{timeslot}</RadioButton>)}
+                        {timeslots.map(timeslot => <RadioButton name={timeslot} checked={time} onChange={(time: string) => {
+                            setTime(time)
+                            context.stepsData.time = time
+                        }
+                        }>{timeslot}</RadioButton>)}
                     </Flex>
                 )}
             </LoadingData>}

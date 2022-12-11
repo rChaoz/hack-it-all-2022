@@ -13,20 +13,21 @@ export function Step5({}: Step5Props) {
 
     const form = useForm({
         initialValues: {
-            email: '',
-            telefon: '',
-            termsOfService: false,
+            email: context.stepsData.email ?? '',
+            phone: context.stepsData.phone ?? '',
         },
 
         validate: {
             email: (value) => /^\S+@\S+$/.test(value) ? null : 'E-mail invalid',
-            telefon: (value) => /\+?\d{10,14}/.test(value) ? null : 'Telefon invalid',
+            phone: (value) => /\+?\d{10,14}/.test(value) ? null : 'Telefon invalid',
         },
     });
 
+    context.stepsData.validate = () => !form.validate().hasErrors
+
     return (<div>
         {/*nume va fi primit de la step4*/}
-        <Title order={2} align={"center"}>NUME, lasă-ne datele de contact</Title>
+        <Title order={2} align={"center"}>{context.stepsData.name}, lasă-ne datele de contact</Title>
         <Text pb={"md"}>Prin intermediul datelor furnizate îți vom transmite informațiile pentru această programare.</Text>
         <Box sx={{maxWidth: 300}} mx="auto">
             <form onSubmit={form.onSubmit((values) => console.log(values))}>
@@ -35,15 +36,16 @@ export function Step5({}: Step5Props) {
                     label="Adresa de e-mail"
                     placeholder="nume@exemplu.rp"
                     {...form.getInputProps('email')}
+                    onBlur={event => context.stepsData.email = event.currentTarget.value}
                 />
 
                 <TextInput
                     withAsterisk
                     label="Număr de telefon mobil"
                     placeholder="Ex: 0733 768 565"
-                    {...form.getInputProps('email')}
+                    {...form.getInputProps('phone')}
+                    onBlur={event => context.stepsData.phone = event.currentTarget.value}
                 />
-
             </form>
         </Box>
 
