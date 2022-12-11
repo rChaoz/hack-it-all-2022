@@ -43,3 +43,7 @@ Content-Type: application/json
     "phone": "0712323123"
 }
 ###
+
+// Cancel
+GET http://localhost:8080/email/cancelAppointment?key=1wfJkwGMFDh37GC
+###
