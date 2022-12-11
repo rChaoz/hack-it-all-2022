@@ -14,11 +14,13 @@ export function Step1({}: Step1Props) {
 
     context.stepsData.validate = useCallback(() => valid, [valid])
 
-    const [checked, setChecked] = useState<string | undefined>(context.stepsData.action)
+    const [checked, setChecked] = useState<Set<string>>(context.stepsData.action ?? new Set())
     const onChangeHandler = (button: string) => {
-        setChecked(button)
-        context.stepsData.action = button
-        setValid(true)
+        if (checked.has(button)) checked.delete(button)
+        else checked.add(button)
+        setChecked(new Set(checked))
+        context.stepsData.action = checked
+        setValid(checked.size > 0)
     }
 
     return (<>
