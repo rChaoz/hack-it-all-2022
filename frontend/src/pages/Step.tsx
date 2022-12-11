@@ -47,8 +47,10 @@ const steps = [
 ]
 
 export interface StepsData {
-    action?: Set<string>,
+    actions?: Set<string>,
     branchID?: number,
+    branchName?: string,
+    branchAddress?: string,
     date?: Date,
     time?: string,
     name?: string,

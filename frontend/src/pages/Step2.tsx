@@ -15,8 +15,10 @@ export function Step2({}: Step2Props) {
     useEffect(() => context.setStep(2), [])
 
     const [resolve, setResolve] = useState(loadInitial())
-    const branchCallback = useCallback((id: number) => {
-        context.stepsData.branchID = id
+    const branchCallback = useCallback((branch: BranchModel) => {
+        context.stepsData.branchID = branch.id
+        context.stepsData.branchName = branch.name
+        context.stepsData.branchAddress = branch.address
         context.stepsData.nextStep(true)
     }, [context])
 
