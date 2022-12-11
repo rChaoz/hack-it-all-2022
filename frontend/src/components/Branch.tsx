@@ -1,6 +1,17 @@
-import {Anchor, Box, Divider, Flex, Paper, Text, useMantineTheme} from "@mantine/core";
+import {Anchor, Box, createStyles, Divider, Flex, Paper, Text, useMantineTheme} from "@mantine/core";
 import {BranchModel} from "../model/BranchModel";
 import {IconMapPin} from "@tabler/icons";
+
+const useStyles = createStyles(theme => ({
+    clickable: {
+        cursor: "pointer",
+        borderRadius: `${theme.radius.lg}px ${theme.radius.lg}px 0 0`,
+        transition: "background-color .15s",
+        "&:hover": {
+            backgroundColor: theme.colorScheme == 'light' ? theme.fn.darken(theme.colors.bcr[0], .07) : theme.colors.dark[6],
+        }
+    },
+}))
 
 export interface BranchProps {
     branch: BranchModel
@@ -8,9 +19,10 @@ export interface BranchProps {
 
 export default function Branch({branch}: BranchProps) {
     const theme = useMantineTheme()
+    const {classes} = useStyles()
 
     return (<Paper radius={"lg"} shadow={"sm"} withBorder>
-        <Box p={"md"}>
+        <Box p={"md"} className={classes.clickable} onClick={() => console.log("suiii")}>
             <Flex direction={"row"} justify={"space-between"}>
                 <Text weight={"bold"} size={"lg"} color={theme.colorScheme == 'light' ? "bcr.8" : "bcr.4"}>{branch.name}</Text>
                 <Text color={"gray"} size={"xs"}>{Math.floor(branch.distance)}m</Text>

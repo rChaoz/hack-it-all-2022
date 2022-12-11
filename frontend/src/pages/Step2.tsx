@@ -6,6 +6,7 @@ import Branch from "../components/Branch";
 import {BranchModel} from "../model/BranchModel";
 import {Await} from "react-router-dom";
 import Placeholder from "../components/Placeholder";
+import Error from "../components/Error";
 
 
 interface Step2Props {
@@ -23,7 +24,7 @@ export function Step2({}: Step2Props) {
         <TextInput label="Caută unitatea" placeholder="Nume unitate / Adresă / Zonă" icon={<IconSearch size={20}/>}/>
         <Space h={"md"}/>
         <Suspense fallback={<Placeholder/>}>
-            <Await resolve={resolve}>
+            <Await resolve={resolve} errorElement={<Error/>}>
                 {(branches: BranchModel[]) => (<Flex direction={"column"} gap={"xs"}>
                     {branches.map(branch => <Branch key={branch.name} branch={branch}/>)}
                 </Flex>)}

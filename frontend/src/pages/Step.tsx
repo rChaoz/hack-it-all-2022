@@ -106,10 +106,9 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
             <ColorSchemeToggle className={classes.colorSchemeToggle}/>
         </Center>
         <Center className={classes.step}>
-            <Flex direction={"column"}>
+            <Flex direction={"column"} align={"center"}>
                 <Text color={theme.colorScheme == 'light' ? "bcr.3" : "bcr.1"}>Pasul {step} - {steps[step - 1].title}</Text>
-                <Progress value={step / steps.length * 100} color={theme.colorScheme == 'light' ? "bcr.3" : "bcr.1"}/>
-                {/*//TODO: MAKE BAR SIZE CONSTANT*/}
+                <Progress sx={{width: 300}} value={step / steps.length * 100} color={theme.colorScheme == 'light' ? "bcr.3" : "bcr.1"}/>
             </Flex>
         </Center>
     </Header>
