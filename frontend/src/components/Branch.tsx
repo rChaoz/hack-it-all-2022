@@ -15,14 +15,15 @@ const useStyles = createStyles(theme => ({
 
 export interface BranchProps {
     branch: BranchModel
+    callback: (name: string) => void
 }
 
-export default function Branch({branch}: BranchProps) {
+export default function Branch({branch, callback}: BranchProps) {
     const theme = useMantineTheme()
     const {classes} = useStyles()
 
     return (<Paper radius={"lg"} shadow={"sm"} withBorder>
-        <Box p={"md"} className={classes.clickable} onClick={() => console.log("suiii")}>
+        <Box p={"md"} className={classes.clickable} onClick={() => callback(branch.name)}>
             <Flex direction={"row"} justify={"space-between"}>
                 <Text weight={"bold"} size={"lg"} color={theme.colorScheme == 'light' ? "bcr.8" : "bcr.4"}>{branch.name}</Text>
                 <Text color={"gray"} size={"xs"}>{Math.floor(branch.distance)}m</Text>

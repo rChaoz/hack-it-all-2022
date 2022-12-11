@@ -38,17 +38,17 @@ export interface StepContextValue {
 export const StepContext = React.createContext<StepContextValue | null>(null)
 
 const steps = [
-    {title: "Alege scopul vizitei", link: ""},
-    {title: "Alege unitatea BCR", link: "location"},
-    {title: "Alege data și intervalul orar", link: "date"},
-    {title: "Să ne cunoaștem!", link: "name"},
-    {title: "Lasă-ne datele de contact", link: "contact"},
-    {title: "Sumarul programării", link: "summary"},
+    {title: "Alege scopul vizitei", link: "", showContinue: true},
+    {title: "Alege unitatea BCR", link: "location", showContinue: false},
+    {title: "Alege data și intervalul orar", link: "date", showContinue: true},
+    {title: "Să ne cunoaștem!", link: "name", showContinue: true},
+    {title: "Lasă-ne datele de contact", link: "contact", showContinue: true},
+    {title: "Sumarul programării", link: "summary", showContinue: true},
 ]
 
 export interface StepsData {
     action?: string,
-    idBranch?: string,
+    branchName?: string,
     date?: string,
     time?: string,
     name?: string,
@@ -59,19 +59,35 @@ export interface StepsData {
 
     isValid: boolean
     validate?: () => boolean
+    nextStep: () => void
 }
 
 export default function Step() {
     const [step, setStep] = useState(1)
 
-    const stepsData = useRef<StepsData>({isValid: false})
+    const navigate = useNavigate()
+
+    const stepsDataRef = useRef<StepsData>({isValid: false} as any)
+    const stepsData = stepsDataRef.current
+    stepsData.nextStep = () => {
+        console.log("suii")
+        if (stepsData.validate == null || !stepsData.validate()) {
+            //setPopover(true)
+            //return
+        }
+        stepsData.validate = undefined
+        if (step < 6) navigate(steps[step].link)
+        else {
+            // TODO efectuare comanda
+        }
+    }
 
     const theme = useMantineTheme()
     const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
     return <AppShell padding={smallScreen ? "xs" : 0} header={<StepHeader step={step} smallScreen={smallScreen}/>}
-                     footer={<StepFooter step={step} stepsData={stepsData.current}/>}>
-        <StepContext.Provider value={{step, setStep, smallScreen, stepsData: stepsData.current}}>
+                     footer={steps[step - 1].showContinue ? <StepFooter step={step} nextStep={stepsData.nextStep}/> : undefined}>
+        <StepContext.Provider value={{step, setStep, smallScreen, stepsData: stepsData}}>
             <Container size={"sm"}>
                 {smallScreen ? <Outlet/> :
                     <Paper shadow={"md"} p={"sm"} m={"xs"} withBorder>
@@ -116,12 +132,10 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
 
 interface StepFooterProps {
     step: number
-    stepsData: StepsData
+    nextStep: () => void
 }
 
-function StepFooter({step, stepsData}: StepFooterProps) {
-    const navigate = useNavigate()
-
+function StepFooter({step, nextStep}: StepFooterProps) {
     const [popover, setPopover] = useState(false)
 
     return (<Footer height={60}>
@@ -129,17 +143,7 @@ function StepFooter({step, stepsData}: StepFooterProps) {
             <Flex direction={"column"} align={"stretch"}>
                 <Popover width={200} position="top" withArrow shadow="md" opened={popover} onChange={setPopover}>
                     <Popover.Target>
-                        <Button my={12} onClick={() => {
-                            if (stepsData.validate == null || !stepsData.validate()) {
-                                //setPopover(true)
-                                //return
-                            }
-                            stepsData.validate = undefined
-                            if (step < 6) navigate(steps[step].link)
-                            else {
-                                // TODO efectuare comanda
-                            }
-                        }}>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
+                        <Button my={12} onClick={nextStep}>{step < steps.length ? "Continuă" : "Programează întâlnirea"}</Button>
                     </Popover.Target>
                     <Popover.Dropdown>
                         <Text size="sm">Te rog să completezi toate câmpurile</Text>

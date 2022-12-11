@@ -1,5 +1,5 @@
 import {Flex, Space, Text, TextInput, Title} from "@mantine/core";
-import React, {Suspense, useContext, useEffect, useState} from "react";
+import React, {Suspense, useCallback, useContext, useEffect, useState} from "react";
 import {StepContext} from "./Step";
 import {IconSearch} from "@tabler/icons";
 import Branch from "../components/Branch";
@@ -17,6 +17,10 @@ export function Step2({}: Step2Props) {
     useEffect(() => context.setStep(2), [])
 
     const [resolve, setResolve] = useState(loadInitial())
+    const branchCallback = useCallback((name: string) => {
+        context.stepsData.branchName = name
+        context.stepsData.nextStep()
+    }, [context])
 
     return (<>
         <Title order={2} align={"center"}>În ce locație ne vizitezi?</Title>
@@ -26,7 +30,7 @@ export function Step2({}: Step2Props) {
         <Suspense fallback={<Placeholder/>}>
             <Await resolve={resolve} errorElement={<Error/>}>
                 {(branches: BranchModel[]) => (<Flex direction={"column"} gap={"xs"}>
-                    {branches.map(branch => <Branch key={branch.name} branch={branch}/>)}
+                    {branches.map(branch => <Branch key={branch.name} branch={branch} callback={branchCallback}/>)}
                 </Flex>)}
             </Await>
         </Suspense>
