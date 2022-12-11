@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="articles" type="com.example.Appointment" -->
+<#-- @ftlvariable name="data" type="com.example.Email" -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,38 +96,38 @@
 </head>
 <body style="text-align: center; background-color:#e5e5e5">
 
-<img class="logo" src="My%20project.png" alt="BCR Logo">
+<img class="logo" src="cid:logo" alt="BCR Logo">
 
 <div class="divv">
     <div class="container">
-        <img class="img" src="programare.png" alt="reservation placeholder">
+        <img class="img" src="cid:placeholder" alt="reservation placeholder">
         <div class="centered"><b>Programarea ta la BCR</b></div>
     </div>
 
     <div class="divvtext">
-        <p style="padding-bottom: 10px">Salut ${name},</p>
-        <p style="padding-top: 10px; padding-bottom: 10px">Programarea ta la <b>${branch}</b> este confirmată.</p>
+        <p style="padding-bottom: 10px">Salut ${data.name},</p>
+        <p style="padding-top: 10px; padding-bottom: 10px">Programarea ta la <b>${data.branch}</b> este confirmată.</p>
 
         <p style="padding-top: 10px; padding-bottom: 10px"><b>Detalii programare:</b></p>
 
-        <p>Scopul vizitei: <b>${purpose}</b></p>
-        <p>Locație: <b>${branch}</b></p>
-        <p>Dată și interval orar: <b>${DATE},${TIME}</b></p>
-        <p>Adresă: <b>${address}</b></p>
+        <p>Scopul vizitei: <b>${data.purpose}</b></p>
+        <p>Locație: <b>${data.branch}</b></p>
+        <p>Dată și interval orar: <b>${data.dateAndTime}</b></p>
+        <p>Adresă: <b>${data.address}</b></p>
 
         <!--Poza cu maps-->
     </div>
     <div class="mapBox">
-        <img class="mapPhoto" src="map.png" alt="maps">
+        <img class="mapPhoto" src="cid:map" alt="maps">
     </div>
     <div class="divvtext">
-        <a class="button" href=${navigateLink}>Afișează traseul pe hartă</a>
+        <a class="button" href="${data.navigateLink}">Afișează traseul pe hartă</a>
 
         <p style="padding-top: 20px">Până când ne întâlnim, poți descărca și adăuga programarea în calendarul tău.</p>
-        <a class="button" href=${calendarLink}>Adaugă în calendar</a>
+        <a class="button" href="${data.calendarLink}">Adaugă în calendar</a>
 
         <p style="padding-top: 20px">În cazul în care nu poți ajunge la data și intervalul orar stabilit, te rugăm să anulezi întâlnirea.</p>
-        <a class="button" href=${cancelAppointment}>Anulează vizita</a>
+        <a class="button" href="${data.cancelAppointment}">Anulează vizita</a>
         <br>
         <br>
         <p style="padding-top: 20px">Cu drag,</p>
@@ -136,12 +136,12 @@
 </div>
 
 <div class="footer">
-    <p>Acest mesaj a fost generat automat, te rugăm să nu day reply.</p>
+    <p>Acest mesaj a fost generat automat, te rugăm să nu dai reply.</p>
     <br>
-    <p>Pentru orice intrebare, scrie-ne un email la <a href="contact.center@bcr.ro">contact.center@bcr.ro</a> sau sună-ne la *2227</p>
+    <p>Pentru orice intrebare, scrie-ne un email la <a href="contact.center@bcr.ro">contact.center@bcr.ro</a> sau sună-ne la *2227.</p>
 </div>
 
-<img class="logo" src="My%20project.png" alt="BCR Logo">
+<img class="logo" src="cid:logo" alt="BCR Logo">
 
 </body>
 </html>

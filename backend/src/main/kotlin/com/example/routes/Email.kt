@@ -1,8 +1,6 @@
 package com.example.routes
 
-import com.example.Appointments
-import com.example.BranchesTimeslots
-import com.example.dbQuery
+import com.example.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -16,6 +14,20 @@ import org.jetbrains.exposed.sql.update
 
 fun Route.configureEmailRoutes() {
     get("/cancelAppointment") {
+
+
+        sendMail("koleci.alexandru@gmail.com", Email(
+            "suii",
+            "branch",
+            "fara scsop",
+            "noapotea",
+            "aici",
+            "s",
+            "s",
+            "s"
+        )
+        )
+
         val key = call.request.queryParameters["key"]
         if (key == null) {
             call.respondText("Forbidden", status = HttpStatusCode.Forbidden)
