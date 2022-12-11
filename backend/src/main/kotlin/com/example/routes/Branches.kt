@@ -23,7 +23,7 @@ fun Route.configureBranchesRoutes() {
 
         val branches = Branch.selectAll().sortedBy { branch ->
             distanceInM(branch.latitude, branch.longitude, lat, long).also { branch.distance = it }
-        }.take(50)
+        }
 
         call.respond(branches)
     }
