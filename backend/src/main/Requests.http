@@ -1,8 +1,18 @@
 // GOOGLE MAPS API REQUESTS
 // Geolocation of user
 POST https://www.googleapis.com/geolocation/v1/geolocate?key={{api_key}}
+###
 
+// Static map
+GET https://maps.googleapis.com/maps/api/staticmap?
+    size=640x400&
+    center=44.4136524%2C26.0678231&
+    zoom=15&
+    maptype=roadmap&
+    markers=color:blue%7C44.4136524%2C26.0678231&
+    key={{api_key}}
 ###
 
 // KTOR REQUESTS
 GET http://localhost:8080/api/all?location=44.410632%2C26.066814
+###
