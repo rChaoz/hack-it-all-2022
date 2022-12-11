@@ -59,7 +59,7 @@ export interface StepsData {
 
     isValid: boolean
     validate?: () => boolean
-    nextStep: () => void
+    nextStep: (force?: boolean) => void
 }
 
 export default function Step() {
@@ -69,11 +69,13 @@ export default function Step() {
 
     const stepsDataRef = useRef<StepsData>({isValid: false} as any)
     const stepsData = stepsDataRef.current
-    stepsData.nextStep = () => {
-        console.log("suii")
-        if (stepsData.validate == null || !stepsData.validate()) {
-            //setPopover(true)
-            //return
+    const [popover, setPopover] = useState(false)
+    stepsData.nextStep = (force: boolean = false) => {
+        if (!force) {
+            if (stepsData.validate == null || !stepsData.validate()) {
+                setPopover(true)
+                return
+            }
         }
         stepsData.validate = undefined
         if (step < 6) navigate(steps[step].link)
@@ -86,7 +88,8 @@ export default function Step() {
     const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
     return <AppShell padding={smallScreen ? "xs" : 0} header={<StepHeader step={step} smallScreen={smallScreen}/>}
-                     footer={steps[step - 1].showContinue ? <StepFooter step={step} nextStep={stepsData.nextStep}/> : undefined}>
+                     footer={steps[step - 1].showContinue ?
+                         <StepFooter step={step} nextStep={stepsData.nextStep} popover={popover} setPopover={setPopover}/> : undefined}>
         <StepContext.Provider value={{step, setStep, smallScreen, stepsData: stepsData}}>
             <Container size={"sm"}>
                 {smallScreen ? <Outlet/> :
@@ -133,11 +136,11 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
 interface StepFooterProps {
     step: number
     nextStep: () => void
+    popover: boolean
+    setPopover: Dispatch<SetStateAction<boolean>>
 }
 
-function StepFooter({step, nextStep}: StepFooterProps) {
-    const [popover, setPopover] = useState(false)
-
+function StepFooter({step, nextStep, popover, setPopover}: StepFooterProps) {
     return (<Footer height={60}>
         <Container size={300}>
             <Flex direction={"column"} align={"stretch"}>

@@ -11,11 +11,7 @@ export function Step3({}: Step3Props) {
     const context = useContext(StepContext)!;
     useEffect(() => context.setStep(3), [])
 
-    const now = new Date()
-    const max = new Date()
-    max.setDate(max.getDate() + 30)
-
-    const [date, setDate] = useState<Date>()
+    const [date, setDate] = useState<Date | undefined>(context.stepsData.date)
     context.stepsData.validate = () => date != null
 
     const resolve = useMemo(() => loadDays(context.stepsData.branchID!), [context.stepsData.branchID])

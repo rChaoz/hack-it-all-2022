@@ -14,11 +14,10 @@ export function Step2({}: Step2Props) {
     const context = useContext(StepContext)!;
     useEffect(() => context.setStep(2), [])
 
-
     const [resolve, setResolve] = useState(loadInitial())
     const branchCallback = useCallback((id: number) => {
         context.stepsData.branchID = id
-        context.stepsData.nextStep()
+        context.stepsData.nextStep(true)
     }, [context])
 
     const [filterOpened, setFilterOpened] = useState(false)

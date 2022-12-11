@@ -10,7 +10,7 @@ export function Step1({}: Step1Props) {
     const context = useContext(StepContext)!;
     useEffect(() => context.setStep(1), [context])
 
-    const [valid, setValid] = useState(false)
+    const [valid, setValid] = useState(context.stepsData.action != null)
 
     context.stepsData.validate = useCallback(() => valid, [valid])
 

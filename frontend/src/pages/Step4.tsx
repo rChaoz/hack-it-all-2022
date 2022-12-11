@@ -25,6 +25,8 @@ export function Step4({}: Step4Props) {
         },
     });
 
+    context.stepsData.validate = () => !form.validate().hasErrors
+
     return (<>
         <Title order={2} align={"center"}>Salut, cum te numesti?</Title>
         <Text pb={"md"}>Haide să ne cunoaștem. Introdu numele de familie și prenumele.</Text>
