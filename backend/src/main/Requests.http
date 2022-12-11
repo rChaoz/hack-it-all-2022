@@ -1,2 +1,8 @@
+// GOOGLE MAPS API REQUESTS
 // Geolocation of user
 POST https://www.googleapis.com/geolocation/v1/geolocate?key={{api_key}}
+
+###
+
+// KTOR REQUESTS
+GET http://localhost:8080/api/all?location=44.410632%2C26.066814

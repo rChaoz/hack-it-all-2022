@@ -1,6 +1,9 @@
 package com.example
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -27,7 +30,11 @@ object Database {
     }
 }
 
+private val coroutineScope = CoroutineScope(Dispatchers.IO)
+
 suspend fun <T> dbQuery(block: suspend () -> T): T = newSuspendedTransaction(Dispatchers.IO) { block() }
+
+fun <T> asyncQuery(block: suspend () -> Unit) = coroutineScope.launch { block() }
 
 object Branches : IntIdTable() {
     val county = varchar("county", 50)
