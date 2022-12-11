@@ -16,8 +16,8 @@ export function Step2({}: Step2Props) {
 
 
     const [resolve, setResolve] = useState(loadInitial())
-    const branchCallback = useCallback((name: string) => {
-        context.stepsData.branchName = name
+    const branchCallback = useCallback((id: number) => {
+        context.stepsData.branchID = id
         context.stepsData.nextStep()
     }, [context])
 
@@ -32,7 +32,7 @@ export function Step2({}: Step2Props) {
         <LoadingData resolve={resolve}>
             {(branches: BranchModel[]) => (<Flex direction={"column"} gap={"xs"}>
                 {(filterOpened ? branches.filter(branch => branch.hours != null && branch.hours != "indisponibil") : branches).slice(0, 50)
-                    .map(branch => <Branch key={branch.name} branch={branch} callback={branchCallback}/>)}
+                    .map(branch => <Branch key={branch.id} branch={branch} callback={branchCallback}/>)}
             </Flex>)}
         </LoadingData>
     </>)

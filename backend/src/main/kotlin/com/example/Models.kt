@@ -9,6 +9,7 @@ import java.time.LocalDate
 
 @Serializable
 data class Branch(
+    val id: Int,
     val county: String,
     val city: String,
     val name: String,
@@ -25,6 +26,7 @@ data class Branch(
         private fun rowToBranch(row: ResultRow) = with(Branches) {
             val dayOfWeek = LocalDate.now().dayOfWeek
             Branch(
+                row[id].value,
                 row[county],
                 row[city],
                 row[name],

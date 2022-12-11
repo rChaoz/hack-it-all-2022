@@ -48,8 +48,8 @@ const steps = [
 
 export interface StepsData {
     action?: string,
-    branchName?: string,
-    date?: string,
+    branchID?: number,
+    date?: Date,
     time?: string,
     name?: string,
     surname?: string,

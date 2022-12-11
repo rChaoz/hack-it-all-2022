@@ -1,4 +1,5 @@
 export interface BranchModel {
+    id: number,
     county: string
     city: string
     name: string

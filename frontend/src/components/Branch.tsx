@@ -15,7 +15,7 @@ const useStyles = createStyles(theme => ({
 
 export interface BranchProps {
     branch: BranchModel
-    callback: (name: string) => void
+    callback: (id: number) => void
 }
 
 export default function Branch({branch, callback}: BranchProps) {
@@ -23,7 +23,7 @@ export default function Branch({branch, callback}: BranchProps) {
     const {classes} = useStyles()
 
     return (<Paper radius={"lg"} shadow={"sm"} withBorder>
-        <Box p={"md"} className={classes.clickable} onClick={() => callback(branch.name)}>
+        <Box p={"md"} className={classes.clickable} onClick={() => callback(branch.id)}>
             <Flex direction={"row"} justify={"space-between"}>
                 <Text weight={"bold"} size={"lg"} color={theme.colorScheme == 'light' ? "bcr.8" : "bcr.4"}>{branch.name}</Text>
                 <Text color={"gray"} size={"xs"}>{Math.floor(branch.distance)}m</Text>
