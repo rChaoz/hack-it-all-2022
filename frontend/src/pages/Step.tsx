@@ -70,8 +70,9 @@ export default function Step() {
     const stepsDataRef = useRef<StepsData>({isValid: false} as any)
     const stepsData = stepsDataRef.current
     const [popover, setPopover] = useState(false)
-    stepsData.nextStep = (force: boolean = false) => {
-        if (!force) {
+    stepsData.nextStep = (force = false) => {
+        // noinspection PointlessBooleanExpressionJS
+        if (force !== true) {
             if (stepsData.validate == null || !stepsData.validate()) {
                 setPopover(true)
                 return
