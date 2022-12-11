@@ -14,20 +14,6 @@ import org.jetbrains.exposed.sql.update
 
 fun Route.configureEmailRoutes() {
     get("/cancelAppointment") {
-
-
-        sendMail("koleci.alexandru@gmail.com", Email(
-            "suii",
-            "branch",
-            "fara scsop",
-            "noapotea",
-            "aici",
-            "s",
-            "s",
-            "s"
-        )
-        )
-
         val key = call.request.queryParameters["key"]
         if (key == null) {
             call.respondText("Forbidden", status = HttpStatusCode.Forbidden)

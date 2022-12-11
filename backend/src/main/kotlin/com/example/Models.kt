@@ -44,6 +44,8 @@ data class Branch(
             )
         }
 
+        suspend fun select(id: Int) = dbQuery { rowToBranch(Branches.select { Branches.id eq id }.single()) }
+
         suspend fun selectAll() = dbQuery { Branches.select { Branches.available eq true }.map(Branch::rowToBranch) }
     }
 }

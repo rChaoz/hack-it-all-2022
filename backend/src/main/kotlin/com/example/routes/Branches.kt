@@ -98,6 +98,8 @@ fun Route.configureBranchesRoutes() {
         }
 
         try {
+            val branch = Branch.select(body.branchID)
+
             val dateTime = LocalDateTime.of(
                 LocalDate.parse(body.date),
                 LocalTime.parse(body.time),
@@ -120,6 +122,20 @@ fun Route.configureBranchesRoutes() {
                     it[occupied] = true
                 }
             }
+
+            // Send mail
+            sendMail(
+                body.email, Email(
+                    body.name,
+                    branch.name,
+                    body.actions.split('|').joinToString(),
+                    dateTime.toString(),
+                    branch.address,
+                    "https://maps.google.com/maps?q=${branch.latitude}%2C${branch.longitude}",
+                    "mid",
+                    randomKey,
+                )
+            )
         } catch (e: Exception) {
             e.printStackTrace()
             call.respondText("Invalid data", status = HttpStatusCode.BadRequest)
