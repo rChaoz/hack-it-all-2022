@@ -60,6 +60,19 @@ class Timeslot {
 
 @Serializable
 data class Appointment(
+    val actions: String,
+    val branchID: Int,
+    val date: String,
+    val time: String,
+    val name: String,
+    val surname: String,
+    val cnp: String,
+    val email: String,
+    val phone: String,
+)
+
+@Serializable
+data class Email(
     val name: String,
     val branch: String,
     val purpose: String,

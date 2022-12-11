@@ -26,3 +26,20 @@ GET http://localhost:8080/api/days/310
 // Get timeslots for branch and day
 GET http://localhost:8080/api/timeslots/310?date=2022-12-12
 ###
+
+// Submit
+POST http://localhost:8080/api/submit
+Content-Type: application/json
+
+{
+    "actions": "luat prune",
+    "branchID": 202,
+    "date": "2022-12-12",
+    "time": "16:00",
+    "name": "Suiii",
+    "surname": "Hehelosu",
+    "cnp": "5123456000000",
+    "email": "matei.alex.elena28@gmail.com",
+    "phone": "0712323123"
+}
+###

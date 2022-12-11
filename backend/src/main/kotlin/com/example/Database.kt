@@ -1,7 +1,6 @@
 package com.example
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jetbrains.exposed.dao.id.IntIdTable
@@ -17,11 +16,13 @@ object Database {
         if (create) transaction {
             SchemaUtils.create(Branches)
             SchemaUtils.create(BranchesTimeslots)
+            SchemaUtils.create(Appointments)
         }
     }
 
     fun reset() {
         transaction {
+            SchemaUtils.drop(Appointments)
             SchemaUtils.drop(BranchesTimeslots)
             SchemaUtils.drop(Branches)
             SchemaUtils.create(Branches)
@@ -33,8 +34,6 @@ object Database {
 private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
 suspend fun <T> dbQuery(block: suspend () -> T): T = newSuspendedTransaction(Dispatchers.IO) { block() }
-
-fun <T> asyncQuery(block: suspend () -> Unit) = coroutineScope.launch { block() }
 
 object Branches : IntIdTable() {
     val county = varchar("county", 50)
@@ -56,4 +55,16 @@ object BranchesTimeslots : IntIdTable() {
     val branch = integer("branch").references(Branches.id)
     val datetime = datetime("datetime")
     val occupied = bool("occupied").default(false)
+}
+
+object Appointments : IntIdTable() {
+    val actions = varchar("actions", 200)
+    val branchID = integer("branch").references(Branches.id)
+    val datetime = datetime("datetime")
+    val name = varchar("name", 50)
+    val surname = varchar("surname", 50)
+    val cnp = varchar("cnp", 20)
+    val email = varchar("email", 50)
+    val phone = varchar("phone", 20)
+    val cancelKey = varchar("cancelKey", 50)
 }
