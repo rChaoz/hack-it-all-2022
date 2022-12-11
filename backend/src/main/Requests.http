@@ -14,5 +14,11 @@ GET https://maps.googleapis.com/maps/api/staticmap?
 ###
 
 // KTOR REQUESTS
+
+// Get branches
 GET http://localhost:8080/api/all?location=44.410632%2C26.066814
+###
+
+// Get days for branch
+GET http://localhost:8080/api/days/305
 ###

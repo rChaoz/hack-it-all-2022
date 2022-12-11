@@ -2,6 +2,7 @@ package com.example
 
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -42,6 +43,16 @@ data class Branch(
         }
 
         suspend fun selectAll() = dbQuery { Branches.select { Branches.available eq true }.map(Branch::rowToBranch) }
+    }
+}
+
+class Timeslot {
+    companion object {
+        private fun rowToTimeslot(row: ResultRow) = row[BranchesTimeslots.datetime]
+
+        suspend fun select(branch: Int) = dbQuery {
+            BranchesTimeslots.select { BranchesTimeslots.branch eq branch and (BranchesTimeslots.occupied eq false) }.map(Timeslot::rowToTimeslot)
+        }
     }
 }
 

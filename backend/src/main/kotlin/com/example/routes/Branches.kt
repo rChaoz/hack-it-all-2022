@@ -13,7 +13,7 @@ import kotlinx.serialization.json.Json
 
 @Suppress("UNCHECKED_CAST")
 fun Route.configureBranchesRoutes() {
-    get("/all") {
+    get("all") {
         // Call Google API
         val response = client.post("https://www.googleapis.com/geolocation/v1/geolocate?key=$API_KEY")
         val geolocation: GeolocationResponse = Json.decodeFromString(response.bodyAsText())
@@ -26,5 +26,16 @@ fun Route.configureBranchesRoutes() {
         }
 
         call.respond(branches)
+    }
+
+    get("days/{id}") {
+        val id = call.parameters["id"]?.toIntOrNull()
+        if (id == null) {
+            call.respondText("Invalid branch ID", status = HttpStatusCode.BadRequest)
+            return@get
+        }
+
+        val timeslots = Timeslot.select(id).distinctBy { it.dayOfYear }.map { it.toLocalDate().toString() }
+        call.respond(timeslots)
     }
 }
