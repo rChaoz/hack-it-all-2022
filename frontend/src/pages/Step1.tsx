@@ -1,12 +1,20 @@
-import {Flex, Text, Title} from "@mantine/core";
+import {createStyles, Flex, Text, Title, useMantineTheme} from "@mantine/core";
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import {StepContext} from "./Step";
 import RadioButton from "../components/RadioButton";
+
+const useStyles = createStyles(theme => ({
+    button: {
+        outlineColor: "red",
+    }
+}))
+
 
 interface Step1Props {
 }
 
 export function Step1({}: Step1Props) {
+    const {classes} = useStyles()
     const context = useContext(StepContext)!;
     useEffect(() => context.setStep(1), [context])
 

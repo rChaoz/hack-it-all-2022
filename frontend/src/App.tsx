@@ -47,11 +47,11 @@ export default function App() {
                 '#6684A3',
                 '#5c7999',
                 '#5C97EB',
-                '#2575E4',
+                '#5e8fbe',//dark
                 '#1a67d2',
                 '#3568AC',
-                '#264C7D',
-                '#21416c',
+                '#183b67', //darkheader
+                '#21416c', //lightheader
             ],
         },
 

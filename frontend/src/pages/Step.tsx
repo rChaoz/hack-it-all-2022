@@ -10,7 +10,7 @@ const useStyles = createStyles(theme => ({
         color: theme.white,
     },
     bar: {
-        backgroundColor: theme.colors.bcr[9],
+        backgroundColor: theme.colorScheme == 'light' ? theme.colors.bcr[9] : theme.colors.bcr[8],
         position: "relative",
         height: 80,
     },
@@ -91,7 +91,7 @@ interface StepHeaderProps {
 function StepHeader({step, smallScreen}: StepHeaderProps) {
     const {classes} = useStyles()
     const navigate = useNavigate()
-
+    const theme = useMantineTheme()
     return <Header height={150} className={classes.header}>
         <Center className={classes.bar}>
             {step > 1 ?
@@ -107,8 +107,9 @@ function StepHeader({step, smallScreen}: StepHeaderProps) {
         </Center>
         <Center className={classes.step}>
             <Flex direction={"column"}>
-                <Text color={"bcr.3"}>Pasul {step} - {steps[step - 1].title}</Text>
-                <Progress value={step / steps.length * 100} color={"bcr.9"}/>
+                <Text color={theme.colorScheme == 'light' ? "bcr.3" : "bcr.1"}>Pasul {step} - {steps[step - 1].title}</Text>
+                <Progress value={step / steps.length * 100} color={theme.colorScheme == 'light' ? "bcr.3" : "bcr.1"}/>
+                {/*//TODO: MAKE BAR SIZE CONSTANT*/}
             </Flex>
         </Center>
     </Header>
