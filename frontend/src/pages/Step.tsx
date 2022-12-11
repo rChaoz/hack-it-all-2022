@@ -1,5 +1,5 @@
 import {Outlet, useNavigate} from "react-router-dom";
-import {ActionIcon, AppShell, Button, Center, Container, createStyles, Flex, Footer, Header, Paper, Popover, Progress, Text, Title, useMantineTheme} from "@mantine/core";
+import {ActionIcon, AppShell, Button, Center, Container, createStyles, Flex, Footer, Header, Modal, Paper, Popover, Progress, Text, Title, useMantineTheme} from "@mantine/core";
 import React, {Dispatch, SetStateAction, useRef, useState} from "react";
 import {IconChevronLeft} from "@tabler/icons";
 import {useMediaQuery} from "@mantine/hooks";
@@ -73,6 +73,7 @@ export default function Step() {
     const stepsDataRef = useRef<StepsData>({isValid: false} as any)
     const stepsData = stepsDataRef.current
     const [popover, setPopover] = useState(false)
+    const [modalError, setModalError] = useState(true)
     stepsData.nextStep = (force = false) => {
         if (step == 6) {
             const data = stepsData as Required<StepsData>
@@ -98,7 +99,7 @@ export default function Step() {
                 body: JSON.stringify(model),
             }).then(response => {
                 if (response.ok) navigate("/success")
-                else console.log("n-am mers :/")
+                else setModalError(true)
             })
             return
         }
@@ -128,6 +129,10 @@ export default function Step() {
                 }
             </Container>
         </StepContext.Provider>
+        <Modal opened={modalError} onClose={() => setModalError(false)} title={"Eroare"}>
+            <Text>A apărut o eroare la trimiterea rezervării. Te rugăm să încerci mai târziu.</Text>
+            <Center pt={"xs"}><Button onClick={() => setModalError(false)}>OK</Button></Center>
+        </Modal>
     </AppShell>
 }
 
