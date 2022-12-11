@@ -24,7 +24,7 @@ export function Step2({}: Step2Props) {
 
     const [filterOpened, setFilterOpened] = useState(false)
     const [searchByUndeferred, setSearchBy] = useState("")
-    const searchBy = useDeferredValue(searchByUndeferred)
+    const searchBy = useDeferredValue(searchByUndeferred).toLowerCase()
 
     return (<>
         <Title order={2} align={"center"}>În ce locație ne vizitezi?</Title>
@@ -36,8 +36,8 @@ export function Step2({}: Step2Props) {
         <Space h={"md"}/>
         <LoadingData resolve={resolve}>
             {(branches: BranchModel[]) => (<Flex direction={"column"} gap={"xs"}>
-                {(filterOpened ? branches.filter(branch => branch.hours != null && branch.hours != "indisponibil" &&
-                    (searchBy == "" || branch.name.includes(searchBy) || branch.address.includes(searchBy))) : branches).slice(0, 50)
+                {branches.filter(branch => (!filterOpened || (branch.hours != null && branch.hours != "indisponibil")) &&
+                    (searchBy == "" || branch.name.toLowerCase().includes(searchBy) || branch.address.toLowerCase().includes(searchBy))).slice(0, 50)
                     .map(branch => <Branch key={branch.id} branch={branch} callback={branchCallback}/>)}
             </Flex>)}
         </LoadingData>
