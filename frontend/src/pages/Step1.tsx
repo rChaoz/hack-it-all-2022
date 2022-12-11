@@ -21,6 +21,21 @@ export function Step1({}: Step1Props) {
         setValid(true)
     }
 
+    // useEffect(() => {
+    //     fetch('https://www.googleapis.com/geolocat', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: null,
+    //     }).then(result => {
+    //         result.json().then(json => {
+    //             console.log(JSON.stringify(json))
+    //         })
+    //     })
+    // }, [])
+
     return (<>
         <Title order={2} align={"center"}>Despre ce vrei sa vorbim?</Title>
         <Text align={"center"} pb={"md"}>Alege un motiv pentru care programezi vizita in unitate:</Text>

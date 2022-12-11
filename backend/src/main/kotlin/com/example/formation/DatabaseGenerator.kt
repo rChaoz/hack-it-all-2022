@@ -1,9 +1,9 @@
 package com.example.formation
 
-import Branches
-import BranchesTimeslots
-import Database
-import dbQuery
+import com.example.Branches
+import com.example.BranchesTimeslots
+import com.example.Database
+import com.example.dbQuery
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
