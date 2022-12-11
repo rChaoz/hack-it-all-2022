@@ -36,3 +36,5 @@ out/
 .vscode/
 /src/main/*.private.env.*
 /src/main/kotlin/com/example/ApiKey.kt
+/map.html
+/map.png

@@ -73,7 +73,7 @@ export default function Step() {
     const stepsDataRef = useRef<StepsData>({isValid: false} as any)
     const stepsData = stepsDataRef.current
     const [popover, setPopover] = useState(false)
-    const [modalError, setModalError] = useState(true)
+    const [modalError, setModalError] = useState(false)
     stepsData.nextStep = (force = false) => {
         if (step == 6) {
             const data = stepsData as Required<StepsData>

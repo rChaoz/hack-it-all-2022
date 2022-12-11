@@ -10,6 +10,8 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.cors.*
+import net.axay.simplekotlinmail.delivery.MailerManager
+import net.axay.simplekotlinmail.delivery.mailerBuilder
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -38,4 +40,6 @@ fun Application.module() {
     }
     configureSerialization()
     configureRouting()
+
+    MailerManager.defaultMailer = mailerBuilder("smtp.freesmtpservers.com", 25)
 }

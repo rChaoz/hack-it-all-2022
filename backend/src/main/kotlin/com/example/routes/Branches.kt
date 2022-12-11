@@ -9,11 +9,13 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.util.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.update
+import java.io.File
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -97,7 +99,7 @@ fun Route.configureBranchesRoutes() {
             }
         }
 
-        try {
+        val (to, email, branch) = try {
             val branch = Branch.select(body.branchID)
 
             val dateTime = LocalDateTime.of(
@@ -123,8 +125,8 @@ fun Route.configureBranchesRoutes() {
                 }
             }
 
-            // Send mail
-            sendMail(
+            // Create email
+            Triple(
                 body.email, Email(
                     body.name,
                     branch.name,
@@ -134,13 +136,29 @@ fun Route.configureBranchesRoutes() {
                     "https://maps.google.com/maps?q=${branch.latitude}%2C${branch.longitude}",
                     "mid",
                     randomKey,
-                )
+                ), branch
             )
         } catch (e: Exception) {
             e.printStackTrace()
             call.respondText("Invalid data", status = HttpStatusCode.BadRequest)
             return@post
         }
+
+        // Generate map image
+        val response = client.get(
+            """https://maps.googleapis.com/maps/api/staticmap?
+               size=640x400&
+               center=${branch.latitude}%2C${branch.longitude}&
+               zoom=15&
+               maptype=roadmap&
+               markers=color:blue%7C${branch.latitude}%2C${branch.longitude}&
+               key=$API_KEY""".trimIndent()
+        )
+
+        // Send mail
+        val bytes = response.bodyAsChannel().toByteArray()
+        File("map.png").writeBytes(bytes)
+        sendMail(to, bytes, email)
 
         call.respondText("Success", status = HttpStatusCode.OK)
     }

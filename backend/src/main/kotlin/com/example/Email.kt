@@ -18,7 +18,7 @@ private val cfg = Configuration().apply {
     templateExceptionHandler = TemplateExceptionHandler.RETHROW_HANDLER
 }
 
-suspend fun sendMail(to: String, data: Email) {
+suspend fun sendMail(to: String, mapImg: ByteArray, data: Email) {
     val c = object {}.javaClass
 
     val mail = emailBuilder {
@@ -28,11 +28,12 @@ suspend fun sendMail(to: String, data: Email) {
         withSubject("Programarea ta la BCR")
         val writer = StringWriter()
         cfg.getTemplate("email.ftl").process(mapOf("data" to data), writer)
-        withPlainText(writer.toString())
+        withHTMLText(writer.toString())
         withAttachment("logo", c.getResourceAsStream("/templates/logo.png")!!.use { it.readAllBytes() }, "image/png")
         withAttachment("map", c.getResourceAsStream("/templates/map.png")!!.use { it.readAllBytes() }, "image/png")
         withAttachment("placeholder", c.getResourceAsStream("/templates/programare.png")!!.use { it.readAllBytes() }, "image/png")
     }
 
-    File("mail.html").writeText(mail.toString())
+    mail.send()
+    File("mail.html").writeText(mail.htmlText!!)
 }
