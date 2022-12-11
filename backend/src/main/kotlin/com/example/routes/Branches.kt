@@ -10,6 +10,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import java.time.LocalDate
 
 @Suppress("UNCHECKED_CAST")
 fun Route.configureBranchesRoutes() {
@@ -35,7 +36,24 @@ fun Route.configureBranchesRoutes() {
             return@get
         }
 
-        val timeslots = Timeslot.select(id).distinctBy { it.dayOfYear }.map { it.toLocalDate().toString() }
+        val days = Timeslot.select(id).distinctBy { it.dayOfYear }.map { it.toLocalDate().toString() }
+        call.respond(days)
+    }
+
+    get("timeslots/{id}") {
+        val id = call.parameters["id"]?.toIntOrNull()
+        if (id == null) {
+            call.respondText("Invalid branch ID", status = HttpStatusCode.BadRequest)
+            return@get
+        }
+        val date = try {
+            LocalDate.parse(call.request.queryParameters["date"])
+        } catch (e: Exception) {
+            call.respondText("Invalid date", status = HttpStatusCode.BadRequest)
+            return@get
+        }
+
+        val timeslots = Timeslot.select(id).filter { it.toLocalDate().equals(date) }.map { it.toLocalTime().toString() }
         call.respond(timeslots)
     }
 }

@@ -1,12 +1,10 @@
 import {Checkbox, Flex, Space, Text, TextInput, Title} from "@mantine/core";
-import React, {Suspense, useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import {StepContext} from "./Step";
 import {IconSearch} from "@tabler/icons";
 import Branch from "../components/Branch";
 import {BranchModel} from "../model/BranchModel";
-import {Await} from "react-router-dom";
-import Placeholder from "../components/Placeholder";
-import Error from "../components/Error";
+import LoadingData from "../components/LoadingData";
 
 
 interface Step2Props {
@@ -31,14 +29,12 @@ export function Step2({}: Step2Props) {
         <TextInput label="Caută unitatea" placeholder="Nume unitate / Adresă / Zonă" icon={<IconSearch size={20}/>}/>
         <Checkbox pt={"xs"} checked={filterOpened} onChange={(event) => setFilterOpened(event.currentTarget.checked)} label={"Afișează doar sucursale deschise astăzi"}/>
         <Space h={"md"}/>
-        <Suspense fallback={<Placeholder/>}>
-            <Await resolve={resolve} errorElement={<Error/>}>
-                {(branches: BranchModel[]) => (<Flex direction={"column"} gap={"xs"}>
-                    {(filterOpened ? branches.filter(branch => branch.hours != null && branch.hours != "indisponibil") : branches).slice(0, 50)
-                        .map(branch => <Branch key={branch.name} branch={branch} callback={branchCallback}/>)}
-                </Flex>)}
-            </Await>
-        </Suspense>
+        <LoadingData resolve={resolve}>
+            {(branches: BranchModel[]) => (<Flex direction={"column"} gap={"xs"}>
+                {(filterOpened ? branches.filter(branch => branch.hours != null && branch.hours != "indisponibil") : branches).slice(0, 50)
+                    .map(branch => <Branch key={branch.name} branch={branch} callback={branchCallback}/>)}
+            </Flex>)}
+        </LoadingData>
     </>)
 }
 

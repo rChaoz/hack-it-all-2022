@@ -63,6 +63,7 @@ data class Appointment(
     val purpose: String,
     val dateAndTime: String,
     val address: String,
+    val navigateLink: String,
     val calendarLink: String,
     val cancelAppointment: String,
 )

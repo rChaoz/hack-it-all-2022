@@ -20,5 +20,9 @@ GET http://localhost:8080/api/all?location=44.410632%2C26.066814
 ###
 
 // Get days for branch
-GET http://localhost:8080/api/days/305
+GET http://localhost:8080/api/days/310
+###
+
+// Get timeslots for branch and day
+GET http://localhost:8080/api/timeslots/310?date=2022-12-12
 ###
