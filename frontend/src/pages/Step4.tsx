@@ -19,15 +19,15 @@ export function Step4({}: Step4Props) {
         },
 
         validate: {
-            name: (value) => value.length == 0 ? "Te rog sa iți introduci prenumele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Prenume invalid",
-            surname: (value) => value.length == 0 ? "Te rog sa iți introduci numele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Nume invalid",
+            name: (value) => value.length == 0 ? "Te rog sa îți introduci prenumele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Prenume invalid",
+            surname: (value) => value.length == 0 ? "Te rog sa îți introduci numele" : /[a-zA-ZÀ-ž- ]+/.test(value) ? null : "Nume invalid",
             cnp: (value) => (/\d{13}/.test(value) ? null : 'CNP invalid'),
         },
     });
 
     return (<>
         <Title order={2} align={"center"}>Salut, cum te numesti?</Title>
-        <Text pb={"md"}>Haide sa ne cunoastem. Introdu numele de familie si prenumele.</Text>
+        <Text pb={"md"}>Haide să ne cunoaștem. Introdu numele de familie și prenumele.</Text>
         <Box sx={{maxWidth: 300}} mx="auto">
             <form onSubmit={form.onSubmit((values) => console.log(values))}>
                 <TextInput

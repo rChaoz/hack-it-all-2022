@@ -26,8 +26,8 @@ export function Step5({}: Step5Props) {
 
     return (<div>
         {/*nume va fi primit de la step4*/}
-        <Title order={2} align={"center"}>NUME, lasa-ne datele de contact</Title>
-        <Text pb={"md"}>Pe datele furnizate iti vom transmite informatiile pentru aceasta programare.</Text>
+        <Title order={2} align={"center"}>NUME, lasă-ne datele de contact</Title>
+        <Text pb={"md"}>Prin intermediul datelor furnizate îți vom transmite informațiile pentru această programare.</Text>
         <Box sx={{maxWidth: 300}} mx="auto">
             <form onSubmit={form.onSubmit((values) => console.log(values))}>
                 <TextInput
@@ -39,7 +39,7 @@ export function Step5({}: Step5Props) {
 
                 <TextInput
                     withAsterisk
-                    label="Numar de telefon mobil"
+                    label="Număr de telefon mobil"
                     placeholder="Ex: 0733 768 565"
                     {...form.getInputProps('email')}
                 />

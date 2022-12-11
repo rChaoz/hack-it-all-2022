@@ -47,10 +47,10 @@ export function Success({}: SuccessProps) {
     }}>
         <Container size={"xs"}>
             <Flex direction={"column"} p={"md"} align={"center"} justify={"center"} className={classes.flex}>
-                <Title order={4} align={"center"}>Programare vizita la BCR</Title>
+                <Title order={4} align={"center"}>Programare vizită la BCR</Title>
                 <Box py={"xl"}><IconCircleCheck size={100}/></Box>
-                <Title order={3} align={"center"}>Vizita in unitatea BCR a fost programata cu succes!</Title>
-                <Text align={"center"}>Urmeaza sa primesti pe adresa de mail toate informatiile despre programarea ta.</Text>
+                <Title order={3} align={"center"}>Vizita în unitatea BCR a fost programată cu succes!</Title>
+                <Text align={"center"}>Urmează să primești pe adresa de mail toate informațiile despre programarea ta.</Text>
                 <div className={classes.separator}/>
                 <Center className={classes.button}><Button variant={"white"} fullWidth>Înapoi la bcr.ro</Button></Center>
             </Flex>
