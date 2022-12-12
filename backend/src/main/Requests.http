@@ -32,18 +32,18 @@ POST http://localhost:8080/api/submit
 Content-Type: application/json
 
 {
-    "actions": "luat prune",
+    "actions": "Deschidere cont",
     "branchID": 202,
     "date": "2022-12-12",
     "time": "16:00",
-    "name": "Suiii",
-    "surname": "Hehelosu",
+    "name": "Koleci",
+    "surname": "Alexandru",
     "cnp": "5123456000000",
-    "email": "koleci.alexandru@gmail.com",
+    "email": "email@example.ro",
     "phone": "0712323123"
 }
 ###
 
 // Cancel
-GET http://localhost:8080/email/cancelAppointment?key=1wfJkwGMFDh37GC
+GET http://localhost:8080/email/cancelAppointment?key=
 ###

@@ -96,11 +96,11 @@
 </head>
 <body style="text-align: center; background-color:#e5e5e5">
 
-<img class="logo" src="cid:logo" alt="BCR Logo">
+<img class="logo" src="logo.png" alt="BCR Logo">
 
 <div class="divv">
     <div class="container">
-        <img class="img" src="cid:placeholder" alt="reservation placeholder">
+        <img class="img" src="programare.png" alt="reservation placeholder">
         <div class="centered"><b>Programarea ta la BCR</b></div>
     </div>
 
@@ -118,7 +118,7 @@
         <!--Poza cu maps-->
     </div>
     <div class="mapBox">
-        <img class="mapPhoto" src="cid:map" alt="maps">
+        <img class="mapPhoto" src="map.png" alt="maps">
     </div>
     <div class="divvtext">
         <a class="button" href="${data.navigateLink}">Afișează traseul pe hartă</a>
@@ -141,7 +141,7 @@
     <p>Pentru orice intrebare, scrie-ne un email la <a href="contact.center@bcr.ro">contact.center@bcr.ro</a> sau sună-ne la *2227.</p>
 </div>
 
-<img class="logo" src="cid:logo" alt="BCR Logo">
+<img class="logo" src="logo.png" alt="BCR Logo">
 
 </body>
 </html>

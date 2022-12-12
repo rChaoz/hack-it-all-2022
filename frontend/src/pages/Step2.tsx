@@ -1,5 +1,5 @@
 import {Checkbox, Flex, Space, Text, TextInput, Title} from "@mantine/core";
-import React, {useCallback, useContext, useDeferredValue, useEffect, useState} from "react";
+import React, {useCallback, useContext, useDeferredValue, useEffect, useMemo, useState} from "react";
 import {StepContext} from "./Step";
 import {IconSearch} from "@tabler/icons";
 import Branch from "../components/Branch";
@@ -14,7 +14,7 @@ export function Step2({}: Step2Props) {
     const context = useContext(StepContext)!;
     useEffect(() => context.setStep(2), [])
 
-    const [resolve, setResolve] = useState(loadInitial())
+    const resolve = useMemo( () => loadInitial(), [])
     const branchCallback = useCallback((branch: BranchModel) => {
         context.stepsData.branchID = branch.id
         context.stepsData.branchName = branch.name

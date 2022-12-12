@@ -29,9 +29,9 @@ suspend fun sendMail(to: String, mapImg: ByteArray, data: Email) {
         val writer = StringWriter()
         cfg.getTemplate("email.ftl").process(mapOf("data" to data), writer)
         withHTMLText(writer.toString())
-        withAttachment("logo", c.getResourceAsStream("/templates/logo.png")!!.use { it.readAllBytes() }, "image/png")
-        withAttachment("map", c.getResourceAsStream("/templates/map.png")!!.use { it.readAllBytes() }, "image/png")
-        withAttachment("placeholder", c.getResourceAsStream("/templates/programare.png")!!.use { it.readAllBytes() }, "image/png")
+        withAttachment("logo.png", c.getResourceAsStream("/templates/logo.png")!!.use { it.readAllBytes() }, "image/png")
+        withAttachment("map.png", c.getResourceAsStream("/templates/map.png")!!.use { it.readAllBytes() }, "image/png")
+        withAttachment("programare.png", c.getResourceAsStream("/templates/programare.png")!!.use { it.readAllBytes() }, "image/png")
     }
 
     mail.send()
