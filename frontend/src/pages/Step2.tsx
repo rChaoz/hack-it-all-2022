@@ -44,8 +44,6 @@ export function Step2({}: Step2Props) {
     </>)
 }
 
-export const apiKey = {key: ""}
-
 async function loadInitial(): Promise<BranchModel[]> {
     return await (await fetch("http://localhost:8080/api/all")).json()
 }

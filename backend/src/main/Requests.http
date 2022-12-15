@@ -44,6 +44,6 @@ Content-Type: application/json
 }
 ###
 
-// Cancel
+// Cancel (put key here from Appointments table in database)
 GET http://localhost:8080/email/cancelAppointment?key=
 ###

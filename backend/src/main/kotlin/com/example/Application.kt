@@ -1,8 +1,5 @@
 package com.example
-
 import com.example.plugins.*
-import freemarker.cache.ClassTemplateLoader
-import freemarker.core.HTMLOutputFormat
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*

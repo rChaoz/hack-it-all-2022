@@ -23,6 +23,14 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
+task("generateDatabase", JavaExec::class) {
+    group = "application"
+    dependsOn.add(tasks.classes)
+    mainClass.set("com.example.formation.DatabaseGeneratorKt")
+    classpath = tasks.run.get().classpath
+    args("../date_sucursale.json")
+}
+
 repositories {
     mavenCentral()
 }
