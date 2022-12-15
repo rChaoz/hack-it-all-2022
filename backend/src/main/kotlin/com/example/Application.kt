@@ -7,8 +7,10 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.cors.*
+import net.axay.simplekotlinmail.data.SMTPLoginInfo
 import net.axay.simplekotlinmail.delivery.MailerManager
 import net.axay.simplekotlinmail.delivery.mailerBuilder
+import org.simplejavamail.api.mailer.config.TransportStrategy
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -29,6 +31,12 @@ fun Application.module() {
     } catch (e: Exception) {
         println("[WARN] Api Key not set. Google APIs will not work.")
     }
+    var loginInfo = SMTPLoginInfo("smtp.freesmtpservers.com", 25, null, null)
+    try {
+        loginInfo = Class.forName("com.example.ApiKey").getDeclaredMethod("getSmtpCredentials").invoke(null) as SMTPLoginInfo
+    } catch (e: Exception) {
+        println("[WARN] Login info not set. Email will be sent using backup server (\"smtp.freesmtpservers.com\")")
+    }
     @Suppress("DEPRECATION")
     install(CORS) {
         anyHost()
@@ -37,5 +45,7 @@ fun Application.module() {
     configureSerialization()
     configureRouting()
 
-    MailerManager.defaultMailer = mailerBuilder("smtp.freesmtpservers.com", 25)
+    MailerManager.defaultMailer = mailerBuilder(loginInfo) {
+        if (loginInfo.host != "smtp.freesmtpservers.com") withTransportStrategy(TransportStrategy.SMTPS)
+    }
 }

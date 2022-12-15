@@ -37,5 +37,3 @@ out/
 /src/main/*.private.env.*
 /src/main/kotlin/com/example/ApiKey.kt
 /react-app/
-/generated_mail/mail.html
-/generated_mail/map.png

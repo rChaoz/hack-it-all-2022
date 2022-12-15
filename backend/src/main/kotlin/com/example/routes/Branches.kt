@@ -15,7 +15,6 @@ import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.update
-import java.io.File
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -162,7 +161,6 @@ fun Route.configureBranchesRoutes() {
         // Send mail
         if (response.status == HttpStatusCode.OK) {
             val bytes = response.bodyAsChannel().toByteArray()
-            File("generated_mail/map.png").writeBytes(bytes)
             sendMail(to, bytes, email)
         } else sendMail(to, null, email)
 
