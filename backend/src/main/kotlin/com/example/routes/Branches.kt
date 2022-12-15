@@ -139,7 +139,7 @@ fun Route.configureBranchesRoutes() {
                     branch.address,
                     "https://maps.google.com/maps?q=${branch.latitude}%2C${branch.longitude}",
                     "mid",
-                    "http://localhost/email/cancelAppointment?key=" + randomKey,
+                    "http://localhost/email/cancelAppointment?key=$randomKey",
                 ), branch
             )
         } catch (e: Exception) {

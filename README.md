@@ -9,7 +9,7 @@ Folosind un terminal:
 - in folder-ul 'backend' se va rula:
   - `gradlew generateDatabase` (inainte de prima rulare sau oricand se doreste re-initializarea datelor, **poate dura cateva minute**)
   - `gradlew run`
-  - o data ce backend-ul ruleaza se poate accesa site-ul pe adresa http://localhost:8080
+  - o data ce backend-ul ruleaza se poate accesa site-ul pe adresa http://localhost
 
 ## Adaugare API Key
 
