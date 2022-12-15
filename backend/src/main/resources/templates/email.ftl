@@ -44,7 +44,7 @@
             color: blue;
             text-align: center;
             text-decoration: none;
-            padding: 10px 0px 10px 0px;
+            padding: 10px 0 10px 0;
             font-size: 100%;
             font-family: 'Montserrat', sans-serif;
             border: none;
@@ -121,13 +121,13 @@
         <img class="mapPhoto" src="map.png" alt="maps">
     </div>
     <div class="divvtext">
-        <a class="button" href="${data.navigateLink}">Afișează traseul pe hartă</a>
+        <a class="button" target="_blank" href="${data.navigateLink}">Afișează traseul pe hartă</a>
 
         <p style="padding-top: 20px">Până când ne întâlnim, poți descărca și adăuga programarea în calendarul tău.</p>
-        <a class="button" href="${data.calendarLink}">Adaugă în calendar</a>
+        <a class="button" target="_blank" href="${data.calendarLink}">Adaugă în calendar</a>
 
         <p style="padding-top: 20px">În cazul în care nu poți ajunge la data și intervalul orar stabilit, te rugăm să anulezi întâlnirea.</p>
-        <a class="button" href="${data.cancelAppointment}">Anulează vizita</a>
+        <a class="button" target="_blank" href="${data.cancelAppointment}">Anulează vizita</a>
         <br>
         <br>
         <p style="padding-top: 20px">Cu drag,</p>
@@ -138,7 +138,7 @@
 <div class="footer">
     <p>Acest mesaj a fost generat automat, te rugăm să nu dai reply.</p>
     <br>
-    <p>Pentru orice intrebare, scrie-ne un email la <a href="contact.center@bcr.ro">contact.center@bcr.ro</a> sau sună-ne la *2227.</p>
+    <p>Pentru orice intrebare, scrie-ne un email la <a href="mailto:contact.center@bcr.ro">contact.center@bcr.ro</a> sau sună-ne la *2227.</p>
 </div>
 
 <img class="logo" src="logo.png" alt="BCR Logo">

@@ -34,5 +34,5 @@ suspend fun sendMail(to: String, mapImg: ByteArray?, data: Email) {
     }
 
     mail.send()
-    File("mail.html").writeText(mail.htmlText!!)
+    File("generated_mail/mail.html").writeText(mail.htmlText!!)
 }

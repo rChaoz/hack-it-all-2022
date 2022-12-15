@@ -162,7 +162,7 @@ fun Route.configureBranchesRoutes() {
         // Send mail
         if (response.status == HttpStatusCode.OK) {
             val bytes = response.bodyAsChannel().toByteArray()
-            File("map.png").writeBytes(bytes)
+            File("generated_mail/map.png").writeBytes(bytes)
             sendMail(to, bytes, email)
         } else sendMail(to, null, email)
 

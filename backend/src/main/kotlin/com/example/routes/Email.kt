@@ -40,6 +40,6 @@ fun Route.configureEmailRoutes() {
             }
         }
 
-        call.respondRedirect("http://localhost:3000/delete")
+        call.respondRedirect("/delete")
     }
 }
