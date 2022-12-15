@@ -10,15 +10,14 @@ import java.io.StringWriter
 import java.util.*
 
 
-private val cfg = Configuration().apply {
+private val cfg = Configuration(Version(2, 3, 20)).apply {
     setClassForTemplateLoading(object {}.javaClass, "/templates")
-    incompatibleImprovements = Version(2, 3, 20)
     defaultEncoding = "UTF-8"
     locale = Locale.ENGLISH
     templateExceptionHandler = TemplateExceptionHandler.RETHROW_HANDLER
 }
 
-suspend fun sendMail(to: String, mapImg: ByteArray, data: Email) {
+suspend fun sendMail(to: String, mapImg: ByteArray?, data: Email) {
     val c = object {}.javaClass
 
     val mail = emailBuilder {
@@ -30,7 +29,7 @@ suspend fun sendMail(to: String, mapImg: ByteArray, data: Email) {
         cfg.getTemplate("email.ftl").process(mapOf("data" to data), writer)
         withHTMLText(writer.toString())
         withAttachment("logo.png", c.getResourceAsStream("/templates/logo.png")!!.use { it.readAllBytes() }, "image/png")
-        withAttachment("map.png", c.getResourceAsStream("/templates/map.png")!!.use { it.readAllBytes() }, "image/png")
+        if (mapImg != null) withAttachment("map.png", c.getResourceAsStream("/templates/map.png")!!.use { it.readAllBytes() }, "image/png")
         withAttachment("programare.png", c.getResourceAsStream("/templates/programare.png")!!.use { it.readAllBytes() }, "image/png")
     }
 

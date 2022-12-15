@@ -26,13 +26,17 @@ fun Route.configureBranchesRoutes() {
     get("all") {
         // Call Google API
         val response = client.post("https://www.googleapis.com/geolocation/v1/geolocate?key=$API_KEY")
-        val geolocation: GeolocationResponse = Json.decodeFromString(response.bodyAsText())
+        val (lat, long) = if (response.status == HttpStatusCode.OK) {
+            val geolocation: GeolocationResponse = Json.decodeFromString(response.bodyAsText())
 
-        val lat = geolocation.location.lat
-        val long = geolocation.location.lng
+            geolocation.location.lat to geolocation.location.lng
+        } else null to null
 
-        val branches = Branch.selectAll().sortedBy { branch ->
-            distanceInM(branch.latitude, branch.longitude, lat, long).also { branch.distance = it }
+
+        val branches = Branch.selectAll().let { branches ->
+            if (lat != null && long != null) branches.sortedBy { branch ->
+                distanceInM(branch.latitude, branch.longitude, lat, long).also { branch.distance = it }
+            } else branches
         }
 
         call.respond(branches)
@@ -156,9 +160,11 @@ fun Route.configureBranchesRoutes() {
         )
 
         // Send mail
-        val bytes = response.bodyAsChannel().toByteArray()
-        File("map.png").writeBytes(bytes)
-        sendMail(to, bytes, email)
+        if (response.status == HttpStatusCode.OK) {
+            val bytes = response.bodyAsChannel().toByteArray()
+            File("map.png").writeBytes(bytes)
+            sendMail(to, bytes, email)
+        } else sendMail(to, null, email)
 
         call.respondText("Success", status = HttpStatusCode.OK)
     }
