@@ -90,7 +90,7 @@ export default function Step() {
                 phone: data.phone,
             }
 
-            fetch("http://localhost:8080/api/submit", {
+            fetch("http://localhost/api/submit", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',

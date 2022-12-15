@@ -57,9 +57,9 @@ export function Step3({}: Step3Props) {
 }
 
 async function loadDays(branchID: number) {
-    return (await fetch("http://localhost:8080/api/days/" + branchID)).json()
+    return (await fetch("http://localhost/api/days/" + branchID)).json()
 }
 
 async function loadTimeslots(branchID: number, date: Date) {
-    return (await fetch(`http://localhost:8080/api/timeslots/${branchID}?date=${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)).json()
+    return (await fetch(`http://localhost/api/timeslots/${branchID}?date=${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)).json()
 }

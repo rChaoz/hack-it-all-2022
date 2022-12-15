@@ -25,8 +25,7 @@ val client = HttpClient(CIO) {
 fun Application.module() {
     Database.init()
     try {
-        API_KEY = Class.forName("com.example.ApiKey").getDeclaredMethod("getPrivateKey").invoke(null) as String
-        println("It worked! " + API_KEY)
+        API_KEY = Class.forName("com.example.ApiKey").getDeclaredMethod("getApiKey").invoke(null) as String
     } catch (e: Exception) {
         println("[WARN] Api Key not set. Google APIs will not work.")
     }

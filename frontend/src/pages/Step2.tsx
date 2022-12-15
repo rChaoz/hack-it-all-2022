@@ -45,5 +45,5 @@ export function Step2({}: Step2Props) {
 }
 
 async function loadInitial(): Promise<BranchModel[]> {
-    return await (await fetch("http://localhost:8080/api/all")).json()
+    return await (await fetch("http://localhost/api/all")).json()
 }

@@ -16,19 +16,19 @@ GET https://maps.googleapis.com/maps/api/staticmap?
 // KTOR REQUESTS
 
 // Get branches
-GET http://localhost:8080/api/all?location=44.410632%2C26.066814
+GET http://localhost/api/all?location=44.410632%2C26.066814
 ###
 
 // Get days for branch
-GET http://localhost:8080/api/days/310
+GET http://localhost/api/days/310
 ###
 
 // Get timeslots for branch and day
-GET http://localhost:8080/api/timeslots/310?date=2022-12-12
+GET http://localhost/api/timeslots/310?date=2022-12-12
 ###
 
 // Submit
-POST http://localhost:8080/api/submit
+POST http://localhost/api/submit
 Content-Type: application/json
 
 {
@@ -45,5 +45,5 @@ Content-Type: application/json
 ###
 
 // Cancel (put key here from Appointments table in database)
-GET http://localhost:8080/email/cancelAppointment?key=
+GET http://localhost/email/cancelAppointment?key=
 ###

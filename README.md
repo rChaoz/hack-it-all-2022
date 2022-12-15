@@ -2,16 +2,14 @@
 
 **Inainte:** se va consulta "Adaugare API Key" pentru ca api-urile Google Maps sa functioneze corect.
 
-Folosind un terminal (e.g. cmd, **powershell nu functioneaza pentru comanda cu `serve`**):
+Folosind un terminal:
 - in folder-ul 'frontend' se va rula:
   - `npm install`
-  - `npm build`
-  - `serve -s build` (inainte de prima rulare este necesar `npm install -g serve`)
-  - site-ul se poate accesa la http://localhost:3000
+  - `npm run deploy`
 - in folder-ul 'backend' se va rula:
   - `gradlew generateDatabase` (inainte de prima rulare sau oricand se doreste re-initializarea datelor, **poate dura cateva minute**)
   - `gradlew run`
-  - o data ce backend-ul ruleaza se poate folosi site-ul de la frontend
+  - o data ce backend-ul ruleaza se poate accesa site-ul pe adresa http://localhost:8080
 
 ## Adaugare API Key
 
